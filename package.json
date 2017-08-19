@@ -10,7 +10,11 @@
     "lodash": "^4.17.3",
     "react": "16.0.0-alpha.12",
     "react-native": "0.47.1",
-    "react-navigation": "^1.0.0-beta.11"
+    "react-navigation": "^1.0.0-beta.11",
+    "react-redux": "^5.0.4",
+    "redux": "^3.6.0",
+    "redux-actions": "^2.0.3",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",

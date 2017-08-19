@@ -7,13 +7,6 @@ import {
 	ListView,
 	NativeModules
 } from "react-native";
-import { LabelText } from "AppFonts";
-import {
-	DARK_COLOR,
-	DARKBLACK_COLOR,
-	ORANGE_COLOR,
-	YELLOW_COLOR
-} from "AppColors";
 import AppConfig from "AppConfig";
 
 const styles = StyleSheet.create({
