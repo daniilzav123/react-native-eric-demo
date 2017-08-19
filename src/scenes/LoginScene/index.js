@@ -5,8 +5,11 @@ import {
 	Platform,
 	StyleSheet,
 	Text,
-	TextInput, TouchableOpacity,
+	TextInput,
+	TouchableOpacity,
+	StatusBar,
 } from "react-native";
+import { NavigationActions } from 'react-navigation';
 import AppConfig from "AppConfig";
 import { GlobalStorage } from "AppUtilities";
 
@@ -82,7 +85,12 @@ class _LoginScene extends Component {
 	}
 
 	onLogin = () => {
-		this.props.navigation.navigate("Main");
+		const { navigation } = this.props;
+		const resetAction = NavigationActions.reset({
+			index: 0,
+			actions: [NavigationActions.navigate({ routeName: 'Main' })],
+		});
+		navigation.dispatch(resetAction);
 	};
 
 	componentDidMount() {

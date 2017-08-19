@@ -40,7 +40,6 @@ class SplashScene extends Component {
 	}
 
 	async componentDidMount() {
-		StatusBar.setHidden(true);
 		const { navigation } = this.props;
 		const isFirst = await GlobalStorage.getItem(AppConfig.stor_isFirst);
 		setTimeout(() => {

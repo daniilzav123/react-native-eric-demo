@@ -8,14 +8,22 @@ import {
 	NativeModules
 } from "react-native";
 import AppConfig from "AppConfig";
+import {
+	ORANGE_COLOR,
+	DARK_COLOR,
+	DARKBLACK_COLOR,
+	YELLOW_COLOR,
+} from "AppColors";
+import { LabelText } from "AppFonts";
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1
 	},
 	headerContainer: {
-		height: 60,
-		backgroundColor: ORANGE_COLOR,
+		height: 70,
+		paddingTop: 10,
+		backgroundColor: 'steelblue',
 		flexDirection: "row",
 		alignItems: "center",
 		paddingHorizontal: 15
@@ -48,7 +56,8 @@ const styles = StyleSheet.create({
 	},
 	contentContainer: {
 		flex: 1,
-		backgroundColor: DARK_COLOR
+		backgroundColor: DARK_COLOR,
+		paddingTop: 15,
 	},
 	sportsContainer: {
 		height: 60,
@@ -71,7 +80,7 @@ const styles = StyleSheet.create({
 	itemContainer: {
 		height: 50,
 		paddingHorizontal: 15,
-		justifyContent: "center"
+		justifyContent: "center",
 	},
 	avatarImg: {
 		width: 40,
@@ -102,14 +111,14 @@ export class Menu extends Component {
 		this.state = {
 			isShowSortsContainer: false,
 			MENU_ITEMS: [
-				{ index: 0, title: "Edit Profile" },
-				{ index: 1, title: "Camp History" },
-				{ index: 2, title: "Documents" },
-				{ index: 3, title: "Notifications" },
-				{ index: 4, title: "Settings" },
-				{ index: 5, title: "Privacy Policy" },
-				{ index: 6, title: "Terms of Use" },
-				{ index: 7, title: "Contact" }
+				{ index: 0, title: "Genealogy" },
+				{ index: 1, title: "Trade" },
+				{ index: 2, title: "Exchange Market" },
+				{ index: 3, title: "Products" },
+				{ index: 4, title: "E-Wallet" },
+				{ index: 5, title: "Report" },
+				{ index: 6, title: "Helpdesk" },
+				{ index: 7, title: "My Account" }
 			]
 		};
 		this.dataSource = new ListView.DataSource({
@@ -193,47 +202,13 @@ export class Menu extends Component {
 
 					<View style={styles.nameContainer}>
 						<LabelText fontSize={14} color={"white"} style={styles.boldText}>
-							Christina Smith
-						</LabelText>
-						<LabelText fontSize={11} color={"white"} style={styles.italicText}>
-							Logged into CampID
+							My Account
 						</LabelText>
 					</View>
 				</TouchableOpacity>
 				<View style={styles.space} />
-				<TouchableOpacity
-					style={styles.downContainer}
-					onPress={this.onShowDetail}
-				>
-					<Image source={iconName} style={styles.downIcon} />
-				</TouchableOpacity>
 			</View>
 		);
-	};
-
-	renderSports = () => {
-		const { isShowSortsContainer } = this.state;
-		if (isShowSortsContainer) {
-			return (
-				<View style={styles.sportsContainer}>
-					<Image source={require("img/icon_logo.png")} style={styles.logoImg} />
-					<View style={styles.smallSpace} />
-					<TouchableOpacity
-						style={styles.launchContainer}
-						onPress={this.onLaunchSports}
-					>
-						<LabelText
-							fontSize={11}
-							color={YELLOW_COLOR}
-							style={styles.boldText}
-						>
-							Launch SportsID
-						</LabelText>
-					</TouchableOpacity>
-				</View>
-			);
-		}
-		return null;
 	};
 
 	renderMenuItem = menuItem => {
@@ -267,7 +242,6 @@ export class Menu extends Component {
 		return (
 			<View style={styles.container}>
 				{this.renderHeader()}
-				{this.renderSports()}
 				{this.renderContent()}
 			</View>
 		);

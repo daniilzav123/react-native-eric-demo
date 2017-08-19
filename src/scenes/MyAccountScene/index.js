@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import AppConfig from "AppConfig";
 import { GlobalStorage } from "AppUtilities";
+import { HeaderBar } from "AppComponents"
 
 const styles = StyleSheet.create({
 	container: {
@@ -16,12 +17,12 @@ const styles = StyleSheet.create({
 	},
 });
 
-class _MainScene extends Component {
+class _MyAccountScene extends Component {
 	static propTypes = {
 	};
 
 	static navigationOptions = {
-		title: "MainScene",
+		title: "MyAccountScene",
 		header: null,
 		gesturesEnabled: Platform.OS !== "ios"
 	};
@@ -35,18 +36,26 @@ class _MainScene extends Component {
 	componentDidMount() {
 		this.props.showSideBar(false);
 		this.props.disableSideBar(false);
-		this.props.setCurrentScene("MainScene");
+		this.props.setCurrentScene("MyAccountScene");
 	}
+
+	onMenu = () => {
+		this.props.showSideBar(true);
+	};
 
 	render() {
 		return (
 			<View style={styles.container}>
+				<HeaderBar
+					cenTitle="My Account"
+					onMenu={this.onMenu}
+				/>
 			</View>
 		);
 	}
 }
 
 import { sideBarContainer, userContainer } from "ReduxContainers";
-const MainScene1 = sideBarContainer(_MainScene);
-const MainScene = userContainer(MainScene1);
-export default MainScene;
+const MyAccountScene1 = sideBarContainer(_MyAccountScene);
+const MyAccountScene = userContainer(MyAccountScene1);
+export default MyAccountScene;

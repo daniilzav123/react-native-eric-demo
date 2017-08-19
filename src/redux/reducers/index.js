@@ -3,9 +3,9 @@
  */
 import { combineReducers } from "redux";
 import { sidebar } from "./sidebarReducer";
-import demo from "./userReducer";
+import user from "./userReducer";
 
 export default combineReducers({
 	sidebar,
-  demo
+  user
 });

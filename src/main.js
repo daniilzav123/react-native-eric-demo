@@ -8,7 +8,6 @@ import { BLACK_COLOR } from "AppColors";
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingTop: 20,
 		backgroundColor: BLACK_COLOR
 	}
 });
@@ -29,111 +28,113 @@ class _MainPage extends Component {
 		StatusBar.setBarStyle("light-content", true);
 	}
 
+	componentDidMount() {
+	}
+
 	routingScene = sceneIndex => {
 		const { sidebar } = this.props;
 		switch (sceneIndex) {
 			case 0:
-				if (sidebar.currentScene === "EditProfileScene") {
+				if (sidebar.currentScene === "GenealogyScene") {
 					return;
 				} else {
-					const editNavigateAction = NavigationActions.reset({
+					const genNavigateAction = NavigationActions.reset({
 						index: 0,
-						actions: [NavigationActions.navigate({ routeName: "EditProfile" })]
+						actions: [NavigationActions.navigate({ routeName: "Genealogy" })]
 					});
-					this.routingRef.dispatch(editNavigateAction);
+					this.routingRef.dispatch(genNavigateAction);
 				}
 				break;
 			case 1:
 				if (
-					sidebar.currentScene === "CampHistoryScene" ||
-					sidebar.currentScene === "CampHistoryDetailScene"
+					sidebar.currentScene === "TradeScene"
 				) {
 					return;
 				} else {
 					const editNavigateAction = NavigationActions.reset({
 						index: 0,
-						actions: [NavigationActions.navigate({ routeName: "CampHistory" })]
+						actions: [NavigationActions.navigate({ routeName: "Trade" })]
 					});
 					this.routingRef.dispatch(editNavigateAction);
 				}
 				break;
 			case 2:
-				if (sidebar.currentScene === "DocumentUploadScene") {
+				if (sidebar.currentScene === "ExchangeMarketScene") {
 					return;
 				} else {
 					const editNavigateAction = NavigationActions.reset({
 						index: 0,
 						actions: [
-							NavigationActions.navigate({ routeName: "DocumentUpload" })
+							NavigationActions.navigate({ routeName: "ExchangeMarket" })
 						]
 					});
 					this.routingRef.dispatch(editNavigateAction);
 				}
 				break;
 			case 3:
-				if (sidebar.currentScene === "NotificationScene") {
+				if (sidebar.currentScene === "ProductScene") {
 					return;
 				} else {
 					const editNavigateAction = NavigationActions.reset({
 						index: 0,
-						actions: [NavigationActions.navigate({ routeName: "Notification" })]
+						actions: [NavigationActions.navigate({ routeName: "Product" })]
 					});
 					this.routingRef.dispatch(editNavigateAction);
 				}
 				break;
 			case 4:
-				if (sidebar.currentScene === "SettingScene") {
+				if (sidebar.currentScene === "WalletScene") {
 					return;
 				} else {
 					const editNavigateAction = NavigationActions.reset({
 						index: 0,
-						actions: [NavigationActions.navigate({ routeName: "Setting" })]
+						actions: [NavigationActions.navigate({ routeName: "Wallet" })]
 					});
 					this.routingRef.dispatch(editNavigateAction);
 				}
 				break;
 			case 5:
-				if (sidebar.currentScene === "PrivacyPolicyScene") {
+				if (sidebar.currentScene === "ReportScene") {
 					return;
 				} else {
 					const editNavigateAction = NavigationActions.reset({
 						index: 0,
 						actions: [
-							NavigationActions.navigate({ routeName: "PrivacyPolicy" })
+							NavigationActions.navigate({ routeName: "Report" })
 						]
 					});
 					this.routingRef.dispatch(editNavigateAction);
 				}
 				break;
 			case 6:
-				if (sidebar.currentScene === "TermsScene") {
+				if (sidebar.currentScene === "HelpDeskScene") {
 					return;
 				} else {
 					const editNavigateAction = NavigationActions.reset({
 						index: 0,
-						actions: [NavigationActions.navigate({ routeName: "Terms" })]
+						actions: [NavigationActions.navigate({ routeName: "HelpDesk" })]
 					});
 					this.routingRef.dispatch(editNavigateAction);
 				}
 				break;
 			case 7:
-				if (sidebar.currentScene === "ContactScene") {
+				if (sidebar.currentScene === "MyAccountScene") {
 					return;
 				} else {
 					const editNavigateAction = NavigationActions.reset({
 						index: 0,
-						actions: [NavigationActions.navigate({ routeName: "Contact" })]
+						actions: [NavigationActions.navigate({ routeName: "MyAccount" })]
 					});
 					this.routingRef.dispatch(editNavigateAction);
 				}
 				break;
 			case 8:
-				if (sidebar.currentScene === "ProfileScene") {
+				if (sidebar.currentScene === "MyAccountScene") {
 					return;
 				} else {
 					const editNavigateAction = NavigationActions.reset({
 						index: 0,
-						actions: [NavigationActions.navigate({ routeName: "MyProfile" })]
+						actions: [NavigationActions.navigate({ routeName: "MyAccount" })]
 					});
 					this.routingRef.dispatch(editNavigateAction);
 				}

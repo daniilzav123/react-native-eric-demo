@@ -1,11 +1,10 @@
 /**
  * @providesModule ReduxStore
  */
+import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
 
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-// Import the root reducer (which imports all subreducers)
-import rootReducer from 'ReduxReducers';
+import rootReducer from "ReduxReducers";
 
 // Initializing with middleware
 const createStoreWithMiddleware = applyMiddleware(thunk);
@@ -15,4 +14,4 @@ const finalCreateStore = compose(createStoreWithMiddleware)(createStore);
 // Create the store with an initial (empty) state
 // In a complex application, we might rehydrate this state from AsyncStorage or etc
 
-export default finalCreateStore(rootReducer);
+export const store = finalCreateStore(rootReducer);

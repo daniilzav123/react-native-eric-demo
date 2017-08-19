@@ -7,6 +7,7 @@ const defaultValues = () => ({
   user: {
   	id: "",
 		pass: "",
+		avatar: null,
 	}
 });
 
