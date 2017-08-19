@@ -111,14 +111,15 @@ export class Menu extends Component {
 		this.state = {
 			isShowSortsContainer: false,
 			MENU_ITEMS: [
-				{ index: 0, title: "Genealogy" },
-				{ index: 1, title: "Trade" },
-				{ index: 2, title: "Exchange Market" },
-				{ index: 3, title: "Products" },
-				{ index: 4, title: "E-Wallet" },
-				{ index: 5, title: "Report" },
-				{ index: 6, title: "Helpdesk" },
-				{ index: 7, title: "My Account" }
+				{ index: 0, title: "Home" },
+				{ index: 1, title: "Genealogy" },
+				{ index: 2, title: "Trade" },
+				{ index: 3, title: "Exchange Market" },
+				{ index: 4, title: "Products" },
+				{ index: 5, title: "E-Wallet" },
+				{ index: 6, title: "Report" },
+				{ index: 7, title: "Helpdesk" },
+				{ index: 8, title: "My Account" }
 			]
 		};
 		this.dataSource = new ListView.DataSource({
@@ -142,34 +143,7 @@ export class Menu extends Component {
 	};
 
 	onShowMenu = item => {
-		switch (item.index) {
-			case 0:
-				this.props.routeScene(item.index);
-				break;
-			case 1:
-				this.props.routeScene(item.index);
-				break;
-			case 2:
-				this.props.routeScene(item.index);
-				break;
-			case 3:
-				this.props.routeScene(item.index);
-				break;
-			case 4:
-				this.props.routeScene(item.index);
-				break;
-			case 5:
-				this.props.routeScene(item.index);
-				break;
-			case 6:
-				this.props.routeScene(item.index);
-				break;
-			case 7:
-				this.props.routeScene(item.index);
-				break;
-			default:
-				break;
-		}
+		this.props.routeScene(item.index);
 		this.props.showSideBar(false);
 	};
 

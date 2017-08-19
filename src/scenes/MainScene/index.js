@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import AppConfig from "AppConfig";
 import { GlobalStorage } from "AppUtilities";
+import { HeaderBar } from "AppComponents"
 
 const styles = StyleSheet.create({
 	container: {
@@ -38,9 +39,17 @@ class _MainScene extends Component {
 		this.props.setCurrentScene("MainScene");
 	}
 
+	onMenu = () => {
+		this.props.showSideBar(true);
+	};
+
 	render() {
 		return (
 			<View style={styles.container}>
+				<HeaderBar
+					cenTitle="Dashboard"
+					onMenu={this.onMenu}
+				/>
 			</View>
 		);
 	}

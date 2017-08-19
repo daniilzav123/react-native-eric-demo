@@ -35,6 +35,17 @@ class _MainPage extends Component {
 		const { sidebar } = this.props;
 		switch (sceneIndex) {
 			case 0:
+				if (sidebar.currentScene === "MainScene") {
+					return;
+				} else {
+					const genNavigateAction = NavigationActions.reset({
+						index: 0,
+						actions: [NavigationActions.navigate({ routeName: "Main" })]
+					});
+					this.routingRef.dispatch(genNavigateAction);
+				}
+				break;
+			case 1:
 				if (sidebar.currentScene === "GenealogyScene") {
 					return;
 				} else {
@@ -45,7 +56,7 @@ class _MainPage extends Component {
 					this.routingRef.dispatch(genNavigateAction);
 				}
 				break;
-			case 1:
+			case 2:
 				if (
 					sidebar.currentScene === "TradeScene"
 				) {
@@ -58,7 +69,7 @@ class _MainPage extends Component {
 					this.routingRef.dispatch(editNavigateAction);
 				}
 				break;
-			case 2:
+			case 3:
 				if (sidebar.currentScene === "ExchangeMarketScene") {
 					return;
 				} else {
@@ -71,7 +82,7 @@ class _MainPage extends Component {
 					this.routingRef.dispatch(editNavigateAction);
 				}
 				break;
-			case 3:
+			case 4:
 				if (sidebar.currentScene === "ProductScene") {
 					return;
 				} else {
@@ -82,7 +93,7 @@ class _MainPage extends Component {
 					this.routingRef.dispatch(editNavigateAction);
 				}
 				break;
-			case 4:
+			case 5:
 				if (sidebar.currentScene === "WalletScene") {
 					return;
 				} else {
@@ -93,7 +104,7 @@ class _MainPage extends Component {
 					this.routingRef.dispatch(editNavigateAction);
 				}
 				break;
-			case 5:
+			case 6:
 				if (sidebar.currentScene === "ReportScene") {
 					return;
 				} else {
@@ -106,7 +117,7 @@ class _MainPage extends Component {
 					this.routingRef.dispatch(editNavigateAction);
 				}
 				break;
-			case 6:
+			case 7:
 				if (sidebar.currentScene === "HelpDeskScene") {
 					return;
 				} else {
@@ -117,7 +128,7 @@ class _MainPage extends Component {
 					this.routingRef.dispatch(editNavigateAction);
 				}
 				break;
-			case 7:
+			case 8:
 				if (sidebar.currentScene === "MyAccountScene") {
 					return;
 				} else {
@@ -128,7 +139,7 @@ class _MainPage extends Component {
 					this.routingRef.dispatch(editNavigateAction);
 				}
 				break;
-			case 8:
+			case 9:
 				if (sidebar.currentScene === "MyAccountScene") {
 					return;
 				} else {

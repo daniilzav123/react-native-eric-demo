@@ -28,6 +28,8 @@ export const RequestApi = (url, body = "", method = "GET") => {
 	});
 };
 
+export const Api_Login = (app_id, username, password ) => RequestApi(`${AppConfig.apiUrl}member_login/login`, { app_id, username, password }, "POST");
+
 export const GetEvents = () => RequestApi(`${AppConfig.apiUrl}events`);
 export const GetEventsWithState = region =>
 	RequestApi(`${AppConfig.apiUrl}events?region=${region}`);
@@ -37,8 +39,6 @@ export const GetRushtixEventsWithState = region =>
 
 export const PostFavorite = () =>
 	RequestApi(`${AppConfig.apiUrl}favourite`, "", "POST");
-export const Login = email =>
-	RequestApi(`${AppConfig.apiUrl}login`, { email: email }, "POST");
 export const Profile = user =>
 	RequestApi(`${AppConfig.apiUrl}user`, user, "POST");
 export const Subscribe = user =>
