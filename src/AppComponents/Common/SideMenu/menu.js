@@ -112,14 +112,15 @@ export class Menu extends Component {
 			isShowSortsContainer: false,
 			MENU_ITEMS: [
 				{ index: 0, title: "Home" },
-				{ index: 1, title: "Genealogy" },
-				{ index: 2, title: "Trade" },
-				{ index: 3, title: "Exchange Market" },
-				{ index: 4, title: "Products" },
-				{ index: 5, title: "E-Wallet" },
-				{ index: 6, title: "Report" },
-				{ index: 7, title: "Helpdesk" },
-				{ index: 8, title: "My Account" }
+				{ index: 1, title: "News Update" },
+				{ index: 2, title: "Genealogy" },
+				{ index: 3, title: "Trade" },
+				{ index: 4, title: "Exchange Market" },
+				{ index: 5, title: "Products" },
+				{ index: 6, title: "E-Wallet" },
+				{ index: 7, title: "Report" },
+				{ index: 8, title: "Helpdesk" },
+				{ index: 9, title: "My Account" }
 			]
 		};
 		this.dataSource = new ListView.DataSource({

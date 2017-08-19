@@ -12,3 +12,4 @@ export ProductScene from "./ProductScene";
 export WalletScene from "./WalletScene";
 export ReportScene from "./ReportScene";
 export HelpdeskScene from "./HelpdeskScene";
+export NewsUpdateScene from "./NewsUpdateScene";
