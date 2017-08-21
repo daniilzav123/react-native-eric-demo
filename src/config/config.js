@@ -19,4 +19,8 @@ export default {
 	// api
 	apiUrl: 'http://amapi.ezymlm.net/',
 	accessToken: "",
+
+	//datas
+	dashboard_data: [],
+	news_data: [],
 };

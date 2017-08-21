@@ -5,9 +5,10 @@ import {
 	Platform,
 	StyleSheet,
 	Text,
+	ActivityIndicator,
 } from "react-native";
 import AppConfig from "AppConfig";
-import { GlobalStorage } from "AppUtilities";
+import { RequestApi, GlobalStorage } from "AppUtilities";
 import { HeaderBar } from "AppComponents"
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
@@ -61,14 +62,14 @@ const styles = StyleSheet.create({
 		marginTop: 15,
 	},
 	leftTxt: {
-		fontSize: 15,
+		fontSize: 13,
 		color: '#565656',
 		marginRight: 10,
 		textAlign: 'right',
 		width: 200,
 	},
 	rightTxt: {
-		fontSize: 15,
+		fontSize: 13,
 		color: '#565656',
 		marginLeft: 10,
 		textAlign: 'left',
@@ -82,6 +83,15 @@ const styles = StyleSheet.create({
 		color: '#561e19',
 		marginTop: 15,
 		fontWeight: 'bold'
+	},
+	loadingScene: {
+		position: "absolute",
+		width: AppConfig.windowWidth,
+		height: AppConfig.windowHeight,
+		alignSelf: "stretch",
+		backgroundColor: "rgba(0,0,0,0.5)",
+		alignItems: "center",
+		justifyContent: "center"
 	}
 });
 
@@ -98,6 +108,7 @@ class _MainScene extends Component {
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
+			isLoading: false,
 		};
 	}
 
@@ -105,6 +116,8 @@ class _MainScene extends Component {
 		this.props.showSideBar(false);
 		this.props.disableSideBar(false);
 		this.props.setCurrentScene("MainScene");
+
+		this.setState({ isLoading: true });
 
 		let body = new FormData();
 		body.append("app_id", 'amgames!@#123');
@@ -116,11 +129,11 @@ class _MainScene extends Component {
 			"POST"
 		)
 			.then(response => {
-				this.setState({ isLoading: false });
 				if (response.status === "Success") {
-
+					AppConfig.dashboard_data = response.data;
+					this.setState({ isLoading: false });
 				} else {
-					alert(response.data.error_message);
+					this.setState({ isLoading: false });
 				}
 			})
 			.catch(error => {
@@ -134,6 +147,8 @@ class _MainScene extends Component {
 	};
 
 	render() {
+		const { isLoading } = this.state;
+		const { dashboard_data } = AppConfig;
 		return (
 			<View style={styles.container}>
 				<HeaderBar
@@ -143,38 +158,34 @@ class _MainScene extends Component {
 				<KeyboardAwareScrollView>
 					<View style={styles.priceContainer}>
 						<View>
-							<Text style={styles.upTxt}>E-BONUS</Text>
-							<Text style={styles.downTxt}>$433.16</Text>
+							<Text style={styles.upTxt}>CASH POINT</Text>
+							<Text style={styles.downTxt}>${
+								dashboard_data.length === 0 ? 3 : dashboard_data.ewallet_details.CP.balance
+							}.00</Text>
 							<View style={styles.bar}/>
 						</View>
 
 						<View>
-							<Text style={styles.upTxt}>E-PROFIT</Text>
-							<Text style={styles.downTxt}>$288,750.00</Text>
+							<Text style={styles.upTxt}>TRADE POINT</Text>
+							<Text style={styles.downTxt}>${
+								dashboard_data.length === 0 ? 0 : dashboard_data.ewallet_details.TP.balance
+							}.00</Text>
 							<View style={styles.bar}/>
 						</View>
 
 						<View>
-							<Text style={styles.upTxt}>ACTIVE CREDIT</Text>
-							<Text style={styles.downTxt}>$0.00</Text>
+							<Text style={styles.upTxt}>BONUS TRADE POINT</Text>
+							<Text style={styles.downTxt}>${
+								dashboard_data.length === 0 ? 0 : dashboard_data.ewallet_details.BTP.balance
+							}.00</Text>
 							<View style={styles.bar}/>
 						</View>
 
 						<View>
-							<Text style={styles.upTxt}>REINVEST CREDIT</Text>
-							<Text style={styles.downTxt}>$41,311.88</Text>
-							<View style={styles.bar}/>
-						</View>
-
-						<View>
-							<Text style={styles.upTxt}>EDUCATION CREDIT</Text>
-							<Text style={styles.downTxt}>$41,311.88</Text>
-							<View style={styles.bar}/>
-						</View>
-
-						<View>
-							<Text style={styles.upTxt}>INVESTMENT CREDIT</Text>
-							<Text style={styles.downTxt}>$41,311.88</Text>
+							<Text style={styles.upTxt}>GAME POINT</Text>
+							<Text style={styles.downTxt}>${
+								dashboard_data.length === 0 ? 0 : dashboard_data.ewallet_details.GP.balance
+							}.00</Text>
 							<View style={styles.bar}/>
 						</View>
 
@@ -184,42 +195,69 @@ class _MainScene extends Component {
 						<Text style={styles.redTxt}>My Account Overview</Text>
 
 						<View style={styles.line}>
+							<Text style={styles.leftTxt}>Achieved Rank</Text>
+							<Text style={styles.rightTxt}>{
+								dashboard_data.length === 0 ? "" : dashboard_data.rank_details
+							}</Text>
+						</View>
+
+						<View style={styles.line}>
 							<Text style={styles.leftTxt}>Name</Text>
-							<Text style={styles.rightTxt}>Daniil Zavyalov</Text>
+							<Text style={styles.rightTxt}>{
+								dashboard_data.length === 0 ? "" : dashboard_data.name
+							}</Text>
 						</View>
 
 						<View style={styles.line}>
 							<Text style={styles.leftTxt}>ID</Text>
-							<Text style={styles.rightTxt}>daniil92123</Text>
+							<Text style={styles.rightTxt}>{
+								dashboard_data.length === 0 ? "" : dashboard_data.id
+							}</Text>
 						</View>
 
 						<View style={styles.line}>
 							<Text style={styles.leftTxt}>Investment</Text>
-							<Text style={styles.rightTxt}>33000 - Diamond</Text>
+							<Text style={styles.rightTxt}>{
+								dashboard_data.length === 0 ? "" : dashboard_data.investment
+							}</Text>
 						</View>
 
 						<View style={styles.line}>
 							<Text style={styles.leftTxt}>Email</Text>
-							<Text style={styles.rightTxt}>daniilzavup@gmail.com</Text>
+							<Text style={styles.rightTxt}>{
+								dashboard_data.length === 0 ? "" : dashboard_data.email
+							}</Text>
 						</View>
 
 						<View style={styles.line}>
 							<Text style={styles.leftTxt}>Sponsored Members</Text>
-							<Text style={styles.rightTxt}>2</Text>
+							<Text style={styles.rightTxt}>{
+								dashboard_data.length === 0 ? "" : dashboard_data.sponsored_member
+							}</Text>
 						</View>
 
 						<View style={styles.line}>
 							<Text style={styles.leftTxt}>Sponsored BV</Text>
-							<Text style={styles.rightTxt}>80000.00</Text>
+							<Text style={styles.rightTxt}>{
+								dashboard_data.length === 0 ? "" : dashboard_data.sponsored_bv
+							}</Text>
 						</View>
 
 						<View style={styles.line}>
 							<Text style={styles.leftTxt}>E-Profit Max Cap</Text>
-							<Text style={styles.rightTxt}>90000</Text>
+							<Text style={styles.rightTxt}>{
+								dashboard_data.length === 0 ? "" : dashboard_data["e-profit_cap"]
+							}</Text>
 						</View>
 					</View>
 					<View style={styles.marginBottom}/>
 				</KeyboardAwareScrollView>
+				{
+					isLoading &&
+					<View style={styles.loadingScene}>
+						<ActivityIndicator animating={true} size="small" color="white" />
+					</View>
+				}
 			</View>
 		);
 	}

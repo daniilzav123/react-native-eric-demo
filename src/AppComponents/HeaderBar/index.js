@@ -28,6 +28,10 @@ const styles = StyleSheet.create({
 	menuImg: {
 		width: 25,
 		height: 21,
+	},
+	addImg: {
+		width: 21,
+		height: 21,
 	}
 });
 
@@ -35,6 +39,8 @@ export class HeaderBar extends Component {
 	static propTypes = {
 		cenTitle: PropTypes.string,
 		onMenu: PropTypes.func,
+		spec: PropTypes.string,
+		onAddTicket: PropTypes.func,
 	};
 
 	constructor(props, context) {
@@ -50,20 +56,66 @@ export class HeaderBar extends Component {
 		this.props.onMenu();
 	};
 
+	onAddTicket = () => {
+		this.props.onAddTicket();
+	};
+
 	render() {
-		return (
-			<View style={styles.container}>
-				<TouchableOpacity
-					onPress={this.onMenu}
-				>
-					<Image
-						source={require('img/icon_menu.png')}
-						style={styles.menuImg}
-					/>
-				</TouchableOpacity>
-				<Text style={styles.cenTitle}>{ this.props.cenTitle }</Text>
-				<View style={styles.menuImg}/>
-			</View>
-		);
+		const { spec } = this.props;
+		if (spec === null) {
+			return (
+				<View style={styles.container}>
+					<TouchableOpacity
+						onPress={this.onMenu}
+					>
+						<Image
+							source={require('img/icon_menu.png')}
+							style={styles.menuImg}
+						/>
+					</TouchableOpacity>
+					<Text style={styles.cenTitle}>{ this.props.cenTitle }</Text>
+					<View style={styles.menuImg}/>
+				</View>
+			);
+		} else {
+			if (spec === "Helpdesk") {
+				return (
+					<View style={styles.container}>
+						<TouchableOpacity
+							onPress={this.onMenu}
+						>
+							<Image
+								source={require('img/icon_menu.png')}
+								style={styles.menuImg}
+							/>
+						</TouchableOpacity>
+						<Text style={styles.cenTitle}>{ this.props.cenTitle }</Text>
+						<TouchableOpacity
+							onPress={this.onAddTicket}
+						>
+							<Image
+								source={require('img/icon_uploadmore.png')}
+								style={styles.addImg}
+							/>
+						</TouchableOpacity>
+					</View>
+				);
+			} else {
+				return (
+					<View style={styles.container}>
+						<TouchableOpacity
+							onPress={this.onMenu}
+						>
+							<Image
+								source={require('img/icon_menu.png')}
+								style={styles.menuImg}
+							/>
+						</TouchableOpacity>
+						<Text style={styles.cenTitle}>{ this.props.cenTitle }</Text>
+						<View style={styles.menuImg}/>
+					</View>
+				);
+			}
+		}
 	}
 }

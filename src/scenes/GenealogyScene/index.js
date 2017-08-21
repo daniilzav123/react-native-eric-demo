@@ -15,6 +15,17 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: AppConfig.primaryColor
 	},
+	line: {
+		flexDirection: 'row',
+		justifyContent: 'center',
+		marginTop: 15,
+	},
+	leftTxt: {
+		marginRight: 10,
+	},
+	rightTxt: {
+		marginLeft: 10,
+	},
 });
 
 class _GenealogyScene extends Component {
@@ -50,6 +61,11 @@ class _GenealogyScene extends Component {
 					cenTitle="Genealogy"
 					onMenu={this.onMenu}
 				/>
+
+				<View style={styles.line}>
+					<Text style={styles.leftTxt}>Member ID</Text>
+					<Text style={styles.rightTxt}>Member ID Value</Text>
+				</View>
 			</View>
 		);
 	}

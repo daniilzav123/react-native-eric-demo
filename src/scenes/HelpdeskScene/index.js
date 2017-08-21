@@ -5,6 +5,7 @@ import {
 	Platform,
 	StyleSheet,
 	Text,
+	TouchableOpacity,
 } from "react-native";
 import AppConfig from "AppConfig";
 import { GlobalStorage } from "AppUtilities";
@@ -15,6 +16,26 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: AppConfig.primaryColor
 	},
+	modalContainer: {
+		width: AppConfig.windowWidth - 100,
+		height: AppConfig.windowWidth - 30,
+		marginLeft: 30,
+		marginTop: 40,
+		backgroundColor: 'white',
+		alignItems: "center",
+		justifyContent: "center"
+	},
+	shadowHide: {
+		position: "absolute",
+		width: AppConfig.windowWidth,
+		height: AppConfig.windowHeight,
+		backgroundColor: "transparent"
+	},
+	line: {
+		flexDirection: 'row',
+		paddingHorizontal: 10,
+		justifyContent: 'space-between'
+	}
 });
 
 class _HelpdeskScene extends Component {
@@ -43,12 +64,17 @@ class _HelpdeskScene extends Component {
 		this.props.showSideBar(true);
 	};
 
+	onAddTicket = () => {
+	};
+
 	render() {
 		return (
 			<View style={styles.container}>
 				<HeaderBar
 					cenTitle="Helpdesk"
 					onMenu={this.onMenu}
+					spec="Helpdesk"
+					onAddTicket={this.onAddTicket}
 				/>
 			</View>
 		);

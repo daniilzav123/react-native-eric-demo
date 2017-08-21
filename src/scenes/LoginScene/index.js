@@ -105,16 +105,17 @@ class _LoginScene extends Component {
 		body.append("password", "123456");
 
 		RequestApi(
-			"member/dashboard",
+			"member_login/login",
 			body,
 			"POST"
 		)
 			.then(response => {
 				this.setState({ isLoading: false });
 				if (response.status === "Success") {
+					AppConfig.accessToken = response.data.access_token;
 					const resetAction = NavigationActions.reset({
 						index: 0,
-						actions: [NavigationActions.navigate({ routeName: 'Login' })],
+						actions: [NavigationActions.navigate({ routeName: 'Main' })],
 					});
 					navigation.dispatch(resetAction);
 				} else {
