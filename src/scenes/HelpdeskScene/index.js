@@ -64,7 +64,14 @@ class _HelpdeskScene extends Component {
 		this.props.showSideBar(true);
 	};
 
+	updateDatas = () => {
+		alert('update');
+	};
+
 	onAddTicket = () => {
+		this.props.navigation.navigate("AddTicket", {
+			callback: this.updateDatas,
+		});
 	};
 
 	render() {

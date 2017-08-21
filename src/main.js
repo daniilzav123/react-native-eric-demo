@@ -129,7 +129,7 @@ class _MainPage extends Component {
 				}
 				break;
 			case 8:
-				if (sidebar.currentScene === "HelpDeskScene") {
+				if (sidebar.currentScene === "HelpDeskScene" || sidebar.currentScene === "AddTicketScene") {
 					return;
 				} else {
 					const editNavigateAction = NavigationActions.reset({

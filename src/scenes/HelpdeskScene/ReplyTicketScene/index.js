@@ -48,12 +48,12 @@ const styles = StyleSheet.create({
 	},
 });
 
-class _AddTicketScene extends Component {
+class _ReplyTicketScene extends Component {
 	static propTypes = {
 	};
 
 	static navigationOptions = {
-		title: "AddTicketScene",
+		title: "ReplyTicketScene",
 		header: null,
 		gesturesEnabled: Platform.OS !== "ios"
 	};
@@ -67,7 +67,7 @@ class _AddTicketScene extends Component {
 	componentDidMount() {
 		this.props.showSideBar(false);
 		this.props.disableSideBar(false);
-		this.props.setCurrentScene("AddTicketScene");
+		this.props.setCurrentScene("ReplyTicketScene");
 	}
 
 	onMenu = () => {
@@ -87,8 +87,8 @@ class _AddTicketScene extends Component {
 		return (
 			<View style={styles.container}>
 				<HeaderBar
-					cenTitle="Add Ticket"
-					spec="AddTicket"
+					cenTitle="Reply"
+					spec="Reply"
 					back={this.onBack}
 				/>
 				<KeyboardAwareScrollView>
@@ -112,6 +112,6 @@ class _AddTicketScene extends Component {
 }
 
 import { sideBarContainer, userContainer } from "ReduxContainers";
-const AddTicketScene1 = sideBarContainer(_AddTicketScene);
-const AddTicketScene = userContainer(AddTicketScene1);
-export default AddTicketScene;
+const ReplyTicketScene1 = sideBarContainer(_ReplyTicketScene);
+const ReplyTicketScene = userContainer(ReplyTicketScene1);
+export default ReplyTicketScene;
