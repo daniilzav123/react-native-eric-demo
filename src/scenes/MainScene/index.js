@@ -105,6 +105,28 @@ class _MainScene extends Component {
 		this.props.showSideBar(false);
 		this.props.disableSideBar(false);
 		this.props.setCurrentScene("MainScene");
+
+		let body = new FormData();
+		body.append("app_id", 'amgames!@#123');
+		body.append("access_token", AppConfig.accessToken);
+
+		RequestApi(
+			"member/dashboard",
+			body,
+			"POST"
+		)
+			.then(response => {
+				this.setState({ isLoading: false });
+				if (response.status === "Success") {
+
+				} else {
+					alert(response.data.error_message);
+				}
+			})
+			.catch(error => {
+				alert(error);
+				this.setState({ isLoading: false });
+			});
 	}
 
 	onMenu = () => {

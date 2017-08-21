@@ -7,9 +7,10 @@ import {
 	Text,
 	TextInput,
 	TouchableOpacity,
+	ActivityIndicator,
 } from "react-native";
 import AppConfig from "AppConfig";
-import { GlobalStorage } from "AppUtilities";
+import { GlobalStorage, RequestApi } from "AppUtilities";
 import { HeaderBar } from "AppComponents"
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { ModalDropdown } from "AppComponents";
@@ -92,6 +93,15 @@ const styles = StyleSheet.create({
 		borderWidth: 0.5,
 		borderColor: "gray"
 	},
+	loadingScene: {
+		position: "absolute",
+		width: AppConfig.windowWidth,
+		height: AppConfig.windowHeight,
+		alignSelf: "stretch",
+		backgroundColor: "rgba(0,0,0,0.5)",
+		alignItems: "center",
+		justifyContent: "center"
+	}
 });
 
 class _MyAccountScene extends Component {
@@ -108,6 +118,7 @@ class _MyAccountScene extends Component {
 		super(props, context);
 		this.state = {
 			gender: 1,
+			isLoading: false,
 		};
 	}
 
@@ -130,16 +141,37 @@ class _MyAccountScene extends Component {
 
 	onLogout = () => {
 		const { navigation } = this.props;
-		const resetAction = NavigationActions.reset({
-			index: 0,
-			actions: [NavigationActions.navigate({ routeName: 'Login' })],
-		});
-		navigation.dispatch(resetAction);
-		// this.props.navigation.goBack();
+		this.setState({ isLoading: true });
+
+		let body = new FormData();
+		body.append("app_id", 'amgames!@#123');
+		body.append("access_token", AppConfig.accessToken);
+
+		RequestApi(
+			"member_login/logout",
+			body,
+			"POST"
+		)
+			.then(response => {
+				this.setState({ isLoading: false });
+				if (response.status === "Success") {
+					const resetAction = NavigationActions.reset({
+						index: 0,
+						actions: [NavigationActions.navigate({ routeName: 'Login' })],
+					});
+					navigation.dispatch(resetAction);
+				} else {
+					alert(response.data.error_message);
+				}
+			})
+			.catch(error => {
+				alert(error);
+				this.setState({ isLoading: false });
+			});
 	};
 
 	render() {
-		const { gender } = this.state;
+		const { gender, isLoading } = this.state;
 		return (
 			<View style={styles.container}>
 				<HeaderBar
@@ -251,6 +283,12 @@ class _MyAccountScene extends Component {
 					</View>
 					<View style={styles.marginBottom}/>
 				</KeyboardAwareScrollView>
+				{
+					isLoading &&
+					<View style={styles.loadingScene}>
+						<ActivityIndicator animating={true} size="small" color="white" />
+					</View>
+				}
 			</View>
 		);
 	}

@@ -17,5 +17,6 @@ export default {
 	primaryColor: "#f9f9f9",
 
 	// api
-	apiUrl: 'http://amapi.ezymlm.net/'
+	apiUrl: 'http://amapi.ezymlm.net/',
+	accessToken: "",
 };

@@ -8,10 +8,11 @@ import {
 	TextInput,
 	TouchableOpacity,
 	StatusBar,
+	ActivityIndicator,
 } from "react-native";
 import { NavigationActions } from 'react-navigation';
 import AppConfig from "AppConfig";
-import { GlobalStorage } from "AppUtilities";
+import { RequestApi, GlobalStorage } from "AppUtilities";
 
 const styles = StyleSheet.create({
 	container: {
@@ -66,6 +67,15 @@ const styles = StyleSheet.create({
 		marginTop: 50,
 		marginHorizontal: 10,
 	},
+	loadingScene: {
+		position: "absolute",
+		width: AppConfig.windowWidth,
+		height: AppConfig.windowHeight,
+		alignSelf: "stretch",
+		backgroundColor: "rgba(0,0,0,0.5)",
+		alignItems: "center",
+		justifyContent: "center"
+	}
 });
 
 class _LoginScene extends Component {
@@ -81,16 +91,40 @@ class _LoginScene extends Component {
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
+			isLoading: false,
 		};
 	}
 
 	onLogin = () => {
+		this.setState({ isLoading: true });
 		const { navigation } = this.props;
-		const resetAction = NavigationActions.reset({
-			index: 0,
-			actions: [NavigationActions.navigate({ routeName: 'Main' })],
-		});
-		navigation.dispatch(resetAction);
+
+		let body = new FormData();
+		body.append("app_id", 'amgames!@#123');
+		body.append("username", "kavi");
+		body.append("password", "123456");
+
+		RequestApi(
+			"member/dashboard",
+			body,
+			"POST"
+		)
+			.then(response => {
+				this.setState({ isLoading: false });
+				if (response.status === "Success") {
+					const resetAction = NavigationActions.reset({
+						index: 0,
+						actions: [NavigationActions.navigate({ routeName: 'Login' })],
+					});
+					navigation.dispatch(resetAction);
+				} else {
+					alert(response.data.error_message);
+				}
+			})
+			.catch(error => {
+				alert(error);
+				this.setState({ isLoading: false });
+			});
 	};
 
 	componentDidMount() {
@@ -100,6 +134,7 @@ class _LoginScene extends Component {
 	}
 
 	render() {
+		const { isLoading } = this.state;
 		return (
 			<View style={styles.container}>
 				<View
@@ -133,6 +168,12 @@ class _LoginScene extends Component {
 						<Text style={styles.clubTitle}>Login</Text>
 					</TouchableOpacity>
 				</View>
+				{
+					isLoading &&
+						<View style={styles.loadingScene}>
+							<ActivityIndicator animating={true} size="small" color="white" />
+						</View>
+				}
 			</View>
 		);
 	}
