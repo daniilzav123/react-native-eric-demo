@@ -23,4 +23,5 @@ export default {
 	//datas
 	dashboard_data: [],
 	news_data: [],
+	bank_data: [],
 };

@@ -5,6 +5,8 @@ import {
 	Platform,
 	StyleSheet,
 	Text,
+	TouchableOpacity,
+	Linking,
 } from "react-native";
 import AppConfig from "AppConfig";
 import { GlobalStorage } from "AppUtilities";
@@ -15,6 +17,19 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: AppConfig.primaryColor
 	},
+	accessContainer: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		marginTop: 30,
+	},
+	access: {
+		backgroundColor: 'steelblue',
+		borderRadius: 5,
+		justifyContent: 'center',
+		alignItems: 'center',
+		paddingHorizontal: 30,
+		paddingVertical: 10,
+	}
 });
 
 class _TradeScene extends Component {
@@ -43,6 +58,10 @@ class _TradeScene extends Component {
 		this.props.showSideBar(true);
 	};
 
+	open = () => {
+		Linking.openURL('https://mgntrade.biz/trade_login');
+	};
+
 	render() {
 		return (
 			<View style={styles.container}>
@@ -50,6 +69,11 @@ class _TradeScene extends Component {
 					cenTitle="Trade"
 					onMenu={this.onMenu}
 				/>
+				<View style={styles.accessContainer}>
+					<TouchableOpacity style={styles.access} onPress={this.open}>
+						<Text style={{ color: 'white' }}>Access Platform (MGN)</Text>
+					</TouchableOpacity>
+				</View>
 			</View>
 		);
 	}
