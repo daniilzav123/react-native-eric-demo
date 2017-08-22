@@ -160,7 +160,7 @@ class _MainScene extends Component {
 						<View>
 							<Text style={styles.upTxt}>CASH POINT</Text>
 							<Text style={styles.downTxt}>${
-								dashboard_data.length === 0 ? 3 : dashboard_data.ewallet_details.CP.balance
+								dashboard_data.length === 0 ? 0 : dashboard_data.ewallet_details.CP.balance
 							}.00</Text>
 							<View style={styles.bar}/>
 						</View>

@@ -15,6 +15,14 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: AppConfig.primaryColor
 	},
+	content: {
+		paddingTop: 30,
+		paddingHorizontal: 15,
+	},
+	transactionRecord: {
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
 });
 
 class _ReportScene extends Component {
@@ -50,6 +58,16 @@ class _ReportScene extends Component {
 					cenTitle="Report"
 					onMenu={this.onMenu}
 				/>
+				<View
+					style={styles.content}
+				>
+					<View style={styles.transactionRecord}>
+						<Text>Purchase Transaction Record</Text>
+					</View>
+					<View style={styles.transactionRecord}>
+						<Text>Profit Record</Text>
+					</View>
+				</View>
 			</View>
 		);
 	}

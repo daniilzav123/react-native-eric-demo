@@ -605,7 +605,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = SUUSWAU6A6;
+						DevelopmentTeam = 325WAN28H9;
 						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -1063,10 +1063,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Carlos Zuluaga (8NZN4Y4ZTV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = SUUSWAU6A6;
+				DEVELOPMENT_TEAM = 325WAN28H9;
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1074,10 +1075,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.campid.inc;
+				PRODUCT_BUNDLE_IDENTIFIER = dan.wolodeploy.com;
 				PRODUCT_NAME = Demo;
-				PROVISIONING_PROFILE = "3558b442-5290-4e8c-b474-a8de2665a162";
-				PROVISIONING_PROFILE_SPECIFIER = camp_dev_pp;
+				PROVISIONING_PROFILE = "3f164192-5965-4fbe-bcc8-18b9d3143be4";
+				PROVISIONING_PROFILE_SPECIFIER = BrooksDevPP;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1086,9 +1087,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Carlos Zuluaga (8NZN4Y4ZTV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SUUSWAU6A6;
+				DEVELOPMENT_TEAM = 325WAN28H9;
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1096,10 +1098,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.campid.inc;
+				PRODUCT_BUNDLE_IDENTIFIER = dan.wolodeploy.com;
 				PRODUCT_NAME = Demo;
-				PROVISIONING_PROFILE = "ace0ef2b-239c-448c-b79b-02e458bd883e";
-				PROVISIONING_PROFILE_SPECIFIER = campid_dist_pp;
+				PROVISIONING_PROFILE = "3f164192-5965-4fbe-bcc8-18b9d3143be4";
+				PROVISIONING_PROFILE_SPECIFIER = BrooksDevPP;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
