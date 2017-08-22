@@ -27,7 +27,7 @@ TextInput.defaultProps = {
 };
 
 export const Routing = StackNavigator({
-	initialRouteName: { screen: HelpdeskScene },
+	initialRouteName: { screen: SplashScene },
 	Splash: { screen: SplashScene },
 	Login: { screen: LoginScene },
 	Main: { screen: MainScene },
