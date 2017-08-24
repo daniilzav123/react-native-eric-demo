@@ -59,6 +59,17 @@ const styles = StyleSheet.create({
 		borderRadius: 5,
 		backgroundColor: 'steelblue',
 	},
+	groupBtn: {
+		width: AppConfig.windowWidth - 100,
+		position: 'absolute',
+		justifyContent: 'center',
+		alignItems: 'center',
+		left: 50,
+		bottom: 90,
+		height: 35,
+		borderRadius: 5,
+		backgroundColor: 'steelblue',
+	},
 });
 
 class _GenealogyScene extends Component {
@@ -126,6 +137,10 @@ class _GenealogyScene extends Component {
 		this.props.navigation.navigate("RegisterNewMember");
 	};
 
+	onGroup = () => {
+		this.props.navigation.navigate("Group");
+	};
+
 	render() {
 		const { isLoading } = this.state;
 		const { sponsor_data } = AppConfig;
@@ -147,6 +162,9 @@ class _GenealogyScene extends Component {
 						/>
 					</View>
 				</KeyboardAwareScrollView>
+				<TouchableOpacity style={styles.groupBtn} onPress={this.onGroup}>
+					<Text style={{ color: 'white' }}>Group</Text>
+				</TouchableOpacity>
 				<TouchableOpacity style={styles.registerBtn} onPress={this.newMember}>
 					<Text style={{ color: 'white' }}>Register New Member</Text>
 				</TouchableOpacity>

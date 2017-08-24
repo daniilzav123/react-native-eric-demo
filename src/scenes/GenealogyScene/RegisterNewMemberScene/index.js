@@ -11,8 +11,8 @@ import {
 } from "react-native";
 import AppConfig from "AppConfig";
 import { GlobalStorage } from "AppUtilities";
-import { HeaderBar } from "AppComponents"
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { HeaderBar } from "AppComponents";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const styles = StyleSheet.create({
 	container: {
@@ -63,6 +63,9 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 5,
 		fontSize: 13,
 	},
+	treeContainer: {
+		paddingTop: 20,
+	}
 });
 
 class _RegisterNewMemberScene extends Component {
@@ -82,6 +85,7 @@ class _RegisterNewMemberScene extends Component {
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
+			treeData: [{ title: 'Chicken', children: [ { title: 'Egg' } ] }],
 		};
 		this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 	}

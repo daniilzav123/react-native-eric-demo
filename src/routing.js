@@ -18,6 +18,7 @@ import {
 	ReplyTicketScene,
 	AddBankScene,
 	RegisterNewMemberScene,
+	GroupScene,
 } from "AppScenes";
 
 Text.defaultProps = {
@@ -29,7 +30,7 @@ TextInput.defaultProps = {
 };
 
 export const Routing = StackNavigator({
-	initialRouteName: { screen: SplashScene },
+	initialRouteName: { screen: RegisterNewMemberScene },
 	Splash: { screen: SplashScene },
 	Login: { screen: LoginScene },
 	Main: { screen: MainScene },
@@ -46,4 +47,5 @@ export const Routing = StackNavigator({
 	ReplyTicket: { screen: ReplyTicketScene },
 	AddBank: { screen: AddBankScene },
 	RegisterNewMember: { screen: RegisterNewMemberScene },
+	Group: { screen: GroupScene },
 });

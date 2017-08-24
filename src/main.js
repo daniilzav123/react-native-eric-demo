@@ -57,7 +57,7 @@ class _MainPage extends Component {
 				}
 				break;
 			case 2:
-				if (sidebar.currentScene === "GenealogyScene" || sidebar.currentScene === "RegisterNewMemberScene") {
+				if (sidebar.currentScene === "GenealogyScene" || sidebar.currentScene === "RegisterNewMemberScene" || sidebar.currentScene === "GroupScene") {
 					return;
 				} else {
 					const genNavigateAction = NavigationActions.reset({
