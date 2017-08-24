@@ -50,16 +50,33 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 5,
 		marginTop: 20,
 	},
+	mainContainer: {
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	textinput: {
+		width: AppConfig.windowWidth - 100,
+		height: 35,
+		borderRadius: 5,
+		borderColor: 'gray',
+		borderWidth: 1,
+		paddingHorizontal: 5,
+		fontSize: 13,
+	},
 });
 
-class _WalletScene extends Component {
+class _RegisterNewMemberScene extends Component {
 	static propTypes = {
 	};
 
 	static navigationOptions = {
-		title: "WalletScene",
+		title: "RegisterNewMemberScene",
 		header: null,
 		gesturesEnabled: Platform.OS !== "ios"
+	};
+
+	onBack = () => {
+		this.props.navigation.goBack();
 	};
 
 	constructor(props, context) {
@@ -72,62 +89,22 @@ class _WalletScene extends Component {
 	componentDidMount() {
 		this.props.showSideBar(false);
 		this.props.disableSideBar(false);
-		this.props.setCurrentScene("WalletScene");
+		this.props.setCurrentScene("RegisterNewMemberScene");
 	}
 
-	onMenu = () => {
-		this.props.showSideBar(true);
-	};
-
-	addBank = () => {
-		this.props.navigation.navigate("AddBank");
-	};
-
-	renderRow = (rowData, sectionID, rowID) => {
-		return (
-			<View>
-
-			</View>
-		);
-	};
-
 	render() {
-		const { bank_data } = AppConfig;
 		return (
 			<View style={styles.container}>
 				<HeaderBar
-					cenTitle="E-Wallet"
-					onMenu={this.onMenu}
+					cenTitle="Register New Member"
+					back={this.onBack}
+					spec="RegisterNewMember"
 				/>
 				<KeyboardAwareScrollView>
-					<View style={styles.accessContainer}>
-						<Text style={styles.redTxt}>Bank Detail</Text>
-						<ListView
-							dataSource={this.ds.cloneWithRows(bank_data)}
-							renderRow={this.renderRow}
-							enableEmptySections={true}
-							removeClippedSubviews={false}
+					<View style={styles.mainContainer}>
+						<TextInput
+							style={styles.textinput}
 						/>
-						<TouchableOpacity style={styles.addBank} onPress={this.addBank}>
-							<Text style={{ color: 'white' }}>Add Bank</Text>
-						</TouchableOpacity>
-
-						<Text style={styles.redTxt}>Transfer</Text>
-						<View>
-							<TextInput
-								style={styles.userID}
-								placeholder="UserID"
-							/>
-							<TextInput
-								style={styles.userID}
-								placeholder="EB Amount"
-							/>
-							<TouchableOpacity style={styles.addBank} onPress={this.addBank}>
-								<Text style={{ color: 'white' }}>Submit</Text>
-							</TouchableOpacity>
-						</View>
-
-						<Text style={styles.redTxt}>E-Wallet Record</Text>
 					</View>
 				</KeyboardAwareScrollView>
 			</View>
@@ -136,6 +113,6 @@ class _WalletScene extends Component {
 }
 
 import { sideBarContainer, userContainer } from "ReduxContainers";
-const WalletScene1 = sideBarContainer(_WalletScene);
-const WalletScene = userContainer(WalletScene1);
-export default WalletScene;
+const RegisterNewMemberScene1 = sideBarContainer(_RegisterNewMemberScene);
+const RegisterNewMemberScene = userContainer(RegisterNewMemberScene1);
+export default RegisterNewMemberScene;

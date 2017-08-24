@@ -57,7 +57,7 @@ class _MainPage extends Component {
 				}
 				break;
 			case 2:
-				if (sidebar.currentScene === "GenealogyScene") {
+				if (sidebar.currentScene === "GenealogyScene" || sidebar.currentScene === "RegisterNewMemberScene") {
 					return;
 				} else {
 					const genNavigateAction = NavigationActions.reset({
@@ -105,7 +105,7 @@ class _MainPage extends Component {
 				}
 				break;
 			case 6:
-				if (sidebar.currentScene === "WalletScene") {
+				if (sidebar.currentScene === "WalletScene" || sidebar.currentScene === "AddBankScene") {
 					return;
 				} else {
 					const editNavigateAction = NavigationActions.reset({

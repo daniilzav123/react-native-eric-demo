@@ -153,15 +153,15 @@ class _MyAccountScene extends Component {
 			"POST"
 		)
 			.then(response => {
-				this.setState({ isLoading: false });
 				if (response.status === "Success") {
+					this.setState({ isLoading: false });
 					const resetAction = NavigationActions.reset({
 						index: 0,
 						actions: [NavigationActions.navigate({ routeName: 'Login' })],
 					});
 					navigation.dispatch(resetAction);
 				} else {
-					alert(response.data.error_message);
+					this.setState({ isLoading: false });
 				}
 			})
 			.catch(error => {

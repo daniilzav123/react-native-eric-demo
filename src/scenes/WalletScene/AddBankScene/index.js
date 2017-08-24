@@ -52,14 +52,18 @@ const styles = StyleSheet.create({
 	},
 });
 
-class _WalletScene extends Component {
+class _AddBankScene extends Component {
 	static propTypes = {
 	};
 
 	static navigationOptions = {
-		title: "WalletScene",
+		title: "AddBankScene",
 		header: null,
 		gesturesEnabled: Platform.OS !== "ios"
+	};
+
+	onBack = () => {
+		this.props.navigation.goBack();
 	};
 
 	constructor(props, context) {
@@ -72,70 +76,23 @@ class _WalletScene extends Component {
 	componentDidMount() {
 		this.props.showSideBar(false);
 		this.props.disableSideBar(false);
-		this.props.setCurrentScene("WalletScene");
+		this.props.setCurrentScene("AddBankScene");
 	}
 
-	onMenu = () => {
-		this.props.showSideBar(true);
-	};
-
-	addBank = () => {
-		this.props.navigation.navigate("AddBank");
-	};
-
-	renderRow = (rowData, sectionID, rowID) => {
-		return (
-			<View>
-
-			</View>
-		);
-	};
-
 	render() {
-		const { bank_data } = AppConfig;
 		return (
 			<View style={styles.container}>
 				<HeaderBar
-					cenTitle="E-Wallet"
-					onMenu={this.onMenu}
+					cenTitle="Add Bank"
+					back={this.onBack}
+					spec="AddBank"
 				/>
-				<KeyboardAwareScrollView>
-					<View style={styles.accessContainer}>
-						<Text style={styles.redTxt}>Bank Detail</Text>
-						<ListView
-							dataSource={this.ds.cloneWithRows(bank_data)}
-							renderRow={this.renderRow}
-							enableEmptySections={true}
-							removeClippedSubviews={false}
-						/>
-						<TouchableOpacity style={styles.addBank} onPress={this.addBank}>
-							<Text style={{ color: 'white' }}>Add Bank</Text>
-						</TouchableOpacity>
-
-						<Text style={styles.redTxt}>Transfer</Text>
-						<View>
-							<TextInput
-								style={styles.userID}
-								placeholder="UserID"
-							/>
-							<TextInput
-								style={styles.userID}
-								placeholder="EB Amount"
-							/>
-							<TouchableOpacity style={styles.addBank} onPress={this.addBank}>
-								<Text style={{ color: 'white' }}>Submit</Text>
-							</TouchableOpacity>
-						</View>
-
-						<Text style={styles.redTxt}>E-Wallet Record</Text>
-					</View>
-				</KeyboardAwareScrollView>
 			</View>
 		);
 	}
 }
 
 import { sideBarContainer, userContainer } from "ReduxContainers";
-const WalletScene1 = sideBarContainer(_WalletScene);
-const WalletScene = userContainer(WalletScene1);
-export default WalletScene;
+const AddBankScene1 = sideBarContainer(_AddBankScene);
+const AddBankScene = userContainer(AddBankScene1);
+export default AddBankScene;

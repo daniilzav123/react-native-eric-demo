@@ -71,7 +71,7 @@ export class HeaderBar extends Component {
 
 	render() {
 		const { spec } = this.props;
-		if (spec === "AddTicket") {
+		if (spec === "AddTicket" || spec === "AddBank" || spec === "RegisterNewMember") {
 			return (
 				<View style={styles.container}>
 					<TouchableOpacity

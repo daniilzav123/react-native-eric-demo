@@ -16,6 +16,8 @@ import {
 	NewsUpdateScene,
 	AddTicketScene,
 	ReplyTicketScene,
+	AddBankScene,
+	RegisterNewMemberScene,
 } from "AppScenes";
 
 Text.defaultProps = {
@@ -42,4 +44,6 @@ export const Routing = StackNavigator({
 	NewsUpdate: { screen: NewsUpdateScene },
 	AddTicket: { screen: AddTicketScene },
 	ReplyTicket: { screen: ReplyTicketScene },
+	AddBank: { screen: AddBankScene },
+	RegisterNewMember: { screen: RegisterNewMemberScene },
 });

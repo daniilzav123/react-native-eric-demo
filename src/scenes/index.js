@@ -15,3 +15,5 @@ export HelpdeskScene from "./HelpdeskScene";
 export NewsUpdateScene from "./NewsUpdateScene";
 export AddTicketScene from "./HelpdeskScene/AddTicketScene";
 export ReplyTicketScene from "./HelpdeskScene/ReplyTicketScene";
+export AddBankScene from "./WalletScene/AddBankScene";
+export RegisterNewMemberScene from "./GenealogyScene/RegisterNewMemberScene";

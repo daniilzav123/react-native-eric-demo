@@ -24,4 +24,5 @@ export default {
 	dashboard_data: [],
 	news_data: [],
 	bank_data: [],
+	sponsor_data: [],
 };
