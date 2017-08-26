@@ -13,7 +13,7 @@ import { HeaderBar, Tree } from "AppComponents"
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: AppConfig.primaryColor
+		backgroundColor: 'white'
 	},
 	treeContainer: {
 		paddingTop: 20,
