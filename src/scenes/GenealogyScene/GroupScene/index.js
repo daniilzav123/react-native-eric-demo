@@ -5,6 +5,7 @@ import {
 	Platform,
 	StyleSheet,
 	Text,
+	TouchableOpacity,
 } from "react-native";
 import AppConfig from "AppConfig";
 import { GlobalStorage } from "AppUtilities";
@@ -33,6 +34,7 @@ class _GroupScene extends Component {
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
+			scale: 1.0,
 		};
 	}
 
@@ -50,8 +52,27 @@ class _GroupScene extends Component {
 		this.props.navigation.goBack();
 	};
 
+	onRegister = (x, y) => {
+		alert(x);
+		alert(y);
+	};
+
+	onScaleUp = () => {
+		const { scale } = this.state;
+		if (scale < 2.0) {
+			this.setState({ scale: scale + 0.1});
+		}
+	};
+
+	onScaleDown = () => {
+		const { scale } = this.state;
+		if (scale > 0.5) {
+			this.setState({ scale: scale - 0.1});
+		}
+	};
+
 	render() {
-		const test_treedata = {
+		const test_treedata1 = {
 			root: {
 				name: "root",
 				child: {
@@ -79,6 +100,34 @@ class _GroupScene extends Component {
 				}
 			}
 		};
+		const test_treedata2 = {
+			root: {
+				name: "root",
+				child: {
+					R: {
+						name: "child1",
+						child: {
+							L: {
+								name: "child4",
+								child: {
+									R: {
+										name: "child5"
+									},
+								}
+							},
+							R: {
+								name: "child4",
+								child: {
+									L: {
+										name: "child5"
+									},
+								}
+							}
+						},
+					},
+				}
+			}
+		};
 		return (
 			<View style={styles.container}>
 				<HeaderBar
@@ -87,7 +136,32 @@ class _GroupScene extends Component {
 					spec="Group"
 				/>
 				<View style={styles.treeContainer}>
-					<Tree treeData={test_treedata}/>
+					<Tree treeData={test_treedata1} register={this.onRegister} scale={this.state.scale}/>
+				</View>
+				{/*<View style={{*/}
+					{/*flexDirection: 'row',*/}
+					{/*justifyContent: 'center',*/}
+					{/*alignItems: 'center',*/}
+					{/*position: 'absolute',*/}
+					{/*bottom: 60,*/}
+					{/*width: AppConfig.windowWidth,*/}
+				{/*}}>*/}
+					{/*<Text>Scale: {this.state.scale}x</Text>*/}
+				{/*</View>*/}
+				<View style={{
+					flexDirection: 'row',
+					justifyContent: 'center',
+					alignItems: 'center',
+					position: 'absolute',
+					bottom: 30,
+					width: AppConfig.windowWidth,
+				}}>
+					<TouchableOpacity style={{marginRight: 15}} onPress={this.onScaleUp}>
+						<Text>Scale Up</Text>
+					</TouchableOpacity>
+					<TouchableOpacity style={{marginLeft: 15}} onPress={this.onScaleDown}>
+						<Text>Scale Down</Text>
+					</TouchableOpacity>
 				</View>
 			</View>
 		);

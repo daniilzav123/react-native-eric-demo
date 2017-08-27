@@ -26,7 +26,9 @@ const styles = StyleSheet.create({
 
 export class Tree extends Component {
 	static propTypes = {
-		treeData: PropTypes.object
+		treeData: PropTypes.object,
+		register: PropTypes.func,
+		scale: PropTypes.number,
 	};
 
 	constructor(props, context) {
@@ -61,15 +63,15 @@ export class Tree extends Component {
 				<View
 					key={key}
 					style={{
-						width: 80,
-						height: 80,
+						width: 80 * this.props.scale,
+						height: 80 * this.props.scale,
 						justifyContent: 'center',
 						alignItems: 'center',
 					}}
 				>
 					{
 						this.matrix[parseInt(rowID)][i] > 0 && this.checkTree(parseInt(rowID), i) === "+" &&
-							<TouchableOpacity>
+							<TouchableOpacity style={{ padding: 20 }} onPress={() => { this.props.register(parseInt(rowID), this.matrix[parseInt(rowID)][i]); }}>
 								<Image style={styles.plusImg} source={require('img/plus.png')}/>
 							</TouchableOpacity>
 					}
@@ -101,13 +103,13 @@ export class Tree extends Component {
 				if (treeData.root.child.L !== undefined) {
 					return treeData.root.child.L.name;
 				} else {
-					return "null"
+					return "+"
 				}
 			} else {
 				if (treeData.root.child.R !== undefined) {
 					return treeData.root.child.R.name;
 				} else {
-					return "null"
+					return "+"
 				}
 			}
 		} else if (i === 2) {
