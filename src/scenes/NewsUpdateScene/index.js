@@ -94,15 +94,11 @@ class _NewsUpdateScene extends Component {
 			.then(response => {
 				if (response.status === "Success") {
 					AppConfig.news_data = response.data.news;
-					debugger;
 					// .title
 					// .date_created
 					// .contents
-					this.setState({ isLoading: false });
-				} else {
-					alert(response.data.error_message);
-					this.setState({ isLoading: false });
 				}
+				this.setState({ isLoading: false });
 			})
 			.catch(error => {
 				alert(error);
@@ -122,11 +118,11 @@ class _NewsUpdateScene extends Component {
 		return (
 			<View style={styles.priceContainer}>
 				<View style={styles.line}>
-					<Text>Title: </Text>
+					<Text>{AppConfig.global_string.title}: </Text>
 					<Text>{rowData.title}</Text>
 				</View>
 				<View style={styles.line}>
-					<Text>Date: </Text>
+					<Text>{AppConfig.global_string.date}: </Text>
 					<Text>{rowData.date_created}</Text>
 				</View>
 				<View style={styles.line}>
