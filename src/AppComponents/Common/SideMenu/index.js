@@ -73,6 +73,7 @@ export class SideMenu extends React.Component {
 		showSideBar: PropTypes.func,
 		disableSideBar: PropTypes.func,
 		user: PropTypes.object,
+		sidebar: PropTypes.object,
 		setLanguage: PropTypes.func,
 	};
 
@@ -243,6 +244,7 @@ export class SideMenu extends React.Component {
 			showSideBar,
 			disableSideBar,
 			isOpen,
+			sidebar,
 			user,
 			setLanguage,
 		} = this.props;
@@ -255,6 +257,7 @@ export class SideMenu extends React.Component {
 				currentScene={currentScene}
 				isOpen={isOpen}
 				user={user}
+				sidebar={sidebar}
 				setLanguage={setLanguage}
 			/>
 		);

@@ -75,7 +75,13 @@ const styles = StyleSheet.create({
 		backgroundColor: "rgba(0,0,0,0.5)",
 		alignItems: "center",
 		justifyContent: "center"
-	}
+	},
+	langView: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		paddingHorizontal: 100,
+		width: AppConfig.windowWidth,
+	},
 });
 
 class _LoginScene extends Component {
@@ -133,23 +139,53 @@ class _LoginScene extends Component {
 		this.props.setCurrentScene("LoginScene");
 	}
 
+	onEn = () => {
+		// here
+		AppConfig.global_string.setLanguage('en');
+		this.props.setLanguage('en');
+	};
+
+	onCh = () => {
+		AppConfig.global_string.setLanguage('ch');
+		this.props.setLanguage('ch');
+	};
+
+	onMl = () => {
+		AppConfig.global_string.setLanguage('ml');
+		this.props.setLanguage('ml');
+	};
+
 	render() {
 		const { isLoading } = this.state;
+		const { global_string } = AppConfig;
 		return (
 			<View style={styles.container}>
 				<View
 					style={styles.titleView}
 				>
-					<Text style={styles.clubTitle}>Club Member Login</Text>
+					<Text style={styles.clubTitle}>{global_string.clubmemberlogin}</Text>
+				</View>
+				<View
+					style={styles.langView}
+				>
+					<TouchableOpacity style={{ width: 30, height: 22 }} onPress={this.onEn}>
+						<Image source={require('img/lang_en.png')} style={{ width: 30, height: 22 }}/>
+					</TouchableOpacity>
+					<TouchableOpacity style={{ width: 30, height: 22 }} onPress={this.onCh}>
+						<Image source={require('img/lang_ch.png')} style={{ width: 30, height: 22 }}/>
+					</TouchableOpacity>
+					<TouchableOpacity style={{ width: 30, height: 22 }} onPress={this.onMl}>
+						<Image source={require('img/lang_ml.png')} style={{ width: 30, height: 22 }}/>
+					</TouchableOpacity>
 				</View>
 				<View>
 					<TextInput
 						style={styles.userInput}
-						placeholder="User ID"
+						placeholder={global_string.userid}
 					/>
 					<TextInput
 						style={styles.passInput}
-						placeholder="Password"
+						placeholder={global_string.password}
 						secureTextEntry={true}
 					/>
 				</View>
@@ -159,13 +195,13 @@ class _LoginScene extends Component {
 					<TouchableOpacity
 						style={styles.loginBtn}
 					>
-						<Text style={styles.clubTitle}>Forgot Password</Text>
+						<Text style={styles.clubTitle}>{global_string.forgotpassword}</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
 						style={styles.loginBtn}
 						onPress={this.onLogin}
 					>
-						<Text style={styles.clubTitle}>Login</Text>
+						<Text style={styles.clubTitle}>{global_string.login}</Text>
 					</TouchableOpacity>
 				</View>
 				{

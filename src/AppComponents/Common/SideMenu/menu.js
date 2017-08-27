@@ -116,6 +116,7 @@ export class Menu extends Component {
 		currentScene: PropTypes.any.isRequired,
 		isOpen: React.PropTypes.bool,
 		user: PropTypes.object,
+		sidebar: PropTypes.object,
 		setLanguage: PropTypes.func.isRequired,
 	};
 	static defaultProps = {
@@ -146,8 +147,50 @@ export class Menu extends Component {
 		});
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.sidebar.language === 'en') {
+			this.setState({ lang: 'en', isShowSortsContainer: false, MENU_ITEMS: [
+				{ index: 0, title: AppConfig.global_string.home },
+				{ index: 1, title: AppConfig.global_string.newsupdate },
+				{ index: 2, title: AppConfig.global_string.genealogy },
+				{ index: 3, title: AppConfig.global_string.mgntrade },
+				{ index: 4, title: AppConfig.global_string.exchangemarket },
+				{ index: 5, title: AppConfig.global_string.products },
+				{ index: 6, title: AppConfig.global_string.ewallet },
+				{ index: 7, title: AppConfig.global_string.report },
+				{ index: 8, title: AppConfig.global_string.helpdesk },
+				{ index: 9, title: AppConfig.global_string.myaccount }
+			], });
+		} else if (nextProps.sidebar.language === 'ch') {
+			this.setState({ lang: 'ch', isShowSortsContainer: false, MENU_ITEMS: [
+				{ index: 0, title: AppConfig.global_string.home },
+				{ index: 1, title: AppConfig.global_string.newsupdate },
+				{ index: 2, title: AppConfig.global_string.genealogy },
+				{ index: 3, title: AppConfig.global_string.mgntrade },
+				{ index: 4, title: AppConfig.global_string.exchangemarket },
+				{ index: 5, title: AppConfig.global_string.products },
+				{ index: 6, title: AppConfig.global_string.ewallet },
+				{ index: 7, title: AppConfig.global_string.report },
+				{ index: 8, title: AppConfig.global_string.helpdesk },
+				{ index: 9, title: AppConfig.global_string.myaccount }
+			], });
+		} else if (nextProps.sidebar.language === 'ml') {
+			this.setState({ lang: 'ml', isShowSortsContainer: false, MENU_ITEMS: [
+				{ index: 0, title: AppConfig.global_string.home },
+				{ index: 1, title: AppConfig.global_string.newsupdate },
+				{ index: 2, title: AppConfig.global_string.genealogy },
+				{ index: 3, title: AppConfig.global_string.mgntrade },
+				{ index: 4, title: AppConfig.global_string.exchangemarket },
+				{ index: 5, title: AppConfig.global_string.products },
+				{ index: 6, title: AppConfig.global_string.ewallet },
+				{ index: 7, title: AppConfig.global_string.report },
+				{ index: 8, title: AppConfig.global_string.helpdesk },
+				{ index: 9, title: AppConfig.global_string.myaccount }
+			], });
+		}
+	}
+
 	componentDidMount() {
-		AppConfig.global_string.setLanguage('en');
 	}
 
 	onShowDetail = () => {
@@ -161,7 +204,6 @@ export class Menu extends Component {
 	};
 
 	onShowMenu = item => {
-		debugger;
 		this.props.routeScene(item.index);
 		this.props.showSideBar(false);
 	};

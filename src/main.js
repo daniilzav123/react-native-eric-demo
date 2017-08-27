@@ -201,6 +201,7 @@ class _MainPage extends Component {
 					disableSideBar={this.disableSideBar}
 					user={user}
 					setLanguage={this.setLanguage}
+					sidebar={this.props.sidebar}
 				>
 					<Routing ref={ref => (this.routingRef = ref)} />
 				</SideMenu>

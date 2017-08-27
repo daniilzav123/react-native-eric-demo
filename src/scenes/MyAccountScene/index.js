@@ -172,23 +172,24 @@ class _MyAccountScene extends Component {
 
 	render() {
 		const { gender, isLoading } = this.state;
+		const { global_string } = AppConfig;
 		return (
 			<View style={styles.container}>
 				<HeaderBar
-					cenTitle={AppConfig.global_string.myaccount}
+					cenTitle={global_string.myaccount}
 					onMenu={this.onMenu}
 				/>
 				<KeyboardAwareScrollView>
 					<View style={styles.line}>
-						<Text style={styles.leftTxt}>Name</Text>
+						<Text style={styles.leftTxt}>{global_string.name}</Text>
 						<TextInput style={styles.rightInput}/>
 					</View>
 					<View style={styles.line}>
-						<Text style={styles.leftTxt}>Date Joined</Text>
+						<Text style={styles.leftTxt}>{global_string.datejoined}</Text>
 						<TextInput style={styles.rightInput}/>
 					</View>
 					<View style={styles.line}>
-						<Text style={styles.leftTxt}>Gender</Text>
+						<Text style={styles.leftTxt}>{global_string.gender}</Text>
 						<View
 							style={styles.genderContain}
 						>
@@ -203,7 +204,7 @@ class _MyAccountScene extends Component {
 							<TouchableOpacity
 								onPress={() => {this.updateGender(1)}}
 							>
-								<Text style={styles.genderTxt}>Mail</Text>
+								<Text style={styles.genderTxt}>{global_string.male}</Text>
 							</TouchableOpacity>
 							<TouchableOpacity
 								onPress={() => {this.updateGender(2)}}
@@ -216,40 +217,40 @@ class _MyAccountScene extends Component {
 							<TouchableOpacity
 								onPress={() => {this.updateGender(2)}}
 							>
-								<Text style={styles.genderTxt}>Femail</Text>
+								<Text style={styles.genderTxt}>{global_string.female}</Text>
 							</TouchableOpacity>
 						</View>
 					</View>
 					<View style={styles.line}>
-						<Text style={styles.leftTxt}>Old Password</Text>
+						<Text style={styles.leftTxt}>{global_string.oldpassword}</Text>
 						<TextInput style={styles.rightInput} secureTextEntry={true}/>
 					</View>
 					<View style={styles.line}>
-						<Text style={styles.leftTxt}>Password</Text>
+						<Text style={styles.leftTxt}>{global_string.password}</Text>
 						<TextInput style={styles.rightInput} secureTextEntry={true}/>
 					</View>
 					<View style={styles.line}>
-						<Text style={styles.leftTxt}>Confirm Password</Text>
+						<Text style={styles.leftTxt}>{global_string.confirmpassword}</Text>
 						<TextInput style={styles.rightInput} secureTextEntry={true}/>
 					</View>
 					<View style={styles.line}>
-						<Text style={styles.leftTxt}>Old Secondary Password</Text>
+						<Text style={styles.leftTxt}>{global_string.oldsecondpassword}</Text>
 						<TextInput style={styles.rightInput} secureTextEntry={true}/>
 					</View>
 					<View style={styles.line}>
-						<Text style={styles.leftTxt}>Secondary Password</Text>
+						<Text style={styles.leftTxt}>{global_string.secondpassword}</Text>
 						<TextInput style={styles.rightInput} secureTextEntry={true}/>
 					</View>
 					<View style={styles.line}>
-						<Text style={styles.leftTxt}>Confirm Secondary Password</Text>
+						<Text style={styles.leftTxt}>{global_string.confirmsecondpassword}</Text>
 						<TextInput style={styles.rightInput} secureTextEntry={true}/>
 					</View>
 					<View style={styles.line}>
-						<Text style={styles.leftTxt}>Email * </Text>
+						<Text style={styles.leftTxt}>{global_string.email} * </Text>
 						<TextInput style={styles.rightInput}/>
 					</View>
 					<View style={styles.line}>
-						<Text style={styles.leftTxt}>Country * </Text>
+						<Text style={styles.leftTxt}>{global_string.country} * </Text>
 						<View>
 							<ModalDropdown
 								options={["Australia", "Canada", "USA", "Mexico", "Britain", "Spain"]}
@@ -264,7 +265,7 @@ class _MyAccountScene extends Component {
 						</View>
 					</View>
 					<View style={styles.line}>
-						<Text style={styles.leftTxt}>HP Number * </Text>
+						<Text style={styles.leftTxt}>{global_string.hpnumber} * </Text>
 						<TextInput style={styles.rightInput}/>
 					</View>
 					<View style={styles.line}>
@@ -272,13 +273,13 @@ class _MyAccountScene extends Component {
 							style={styles.updateBtn}
 							onPress={this.onLogin}
 						>
-							<Text style={styles.updateTxt}>Update</Text>
+							<Text style={styles.updateTxt}>{global_string.update}</Text>
 						</TouchableOpacity>
 						<TouchableOpacity
 							style={styles.updateBtn}
 							onPress={this.onLogout}
 						>
-							<Text style={styles.updateTxt}>Logout</Text>
+							<Text style={styles.updateTxt}>{global_string.logout}</Text>
 						</TouchableOpacity>
 					</View>
 					<View style={styles.marginBottom}/>
