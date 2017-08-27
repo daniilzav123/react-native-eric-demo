@@ -2,7 +2,8 @@ const defaultValues = () => ({
 	sidebar: {
 		showSidebar: false,
 		disableSidebar: true,
-		currentScene: ""
+		currentScene: "",
+		language: 'en',
 	},
   user: {
   	id: "",

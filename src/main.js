@@ -18,7 +18,8 @@ class _MainPage extends Component {
 		showSideBar: PropTypes.func,
 		disableSideBar: PropTypes.func,
 		setCurrentScene: PropTypes.func,
-		user: PropTypes.object
+		user: PropTypes.object,
+		setLanguage: PropTypes.func,
 	};
 
 	constructor(props) {
@@ -170,6 +171,10 @@ class _MainPage extends Component {
 		this.props.setCurrentScene(scene);
 	};
 
+	setLanguage = language => {
+		this.props.setLanguage(language);
+	};
+
 	showSideBar = bFlag => {
 		this.props.showSideBar(bFlag);
 	};
@@ -195,6 +200,7 @@ class _MainPage extends Component {
 					showSideBar={this.showSideBar}
 					disableSideBar={this.disableSideBar}
 					user={user}
+					setLanguage={this.setLanguage}
 				>
 					<Routing ref={ref => (this.routingRef = ref)} />
 				</SideMenu>

@@ -119,7 +119,6 @@ class _LoginScene extends Component {
 					});
 					navigation.dispatch(resetAction);
 				} else {
-					alert(response.data.error_message);
 				}
 			})
 			.catch(error => {

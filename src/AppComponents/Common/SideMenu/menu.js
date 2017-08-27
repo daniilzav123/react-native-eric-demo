@@ -5,7 +5,8 @@ import {
 	Image,
 	TouchableOpacity,
 	ListView,
-	NativeModules
+	NativeModules,
+	ActivityIndicator,
 } from "react-native";
 import AppConfig from "AppConfig";
 import {
@@ -15,28 +16,7 @@ import {
 	YELLOW_COLOR,
 } from "AppColors";
 import { LabelText } from "AppFonts";
-import LocalizedStrings from 'react-native-localization';
-
-const strings = new LocalizedStrings({
-	en:{
-		how:"How?",
-		boiledEgg:"Boiled egg",
-		softBoiledEgg:"Soft-boiled egg",
-		choice:"How to choose the egg"
-	},
-	ch: {
-		how:"你是谁?",
-		boiledEgg:"Uovo sodo",
-		softBoiledEgg:"Uovo alla coque",
-		choice:"Come scegliere l'uovo"
-	},
-	ml: {
-		how:"Come?",
-		boiledEgg:"Uovo sodo",
-		softBoiledEgg:"Uovo alla coque",
-		choice:"Come scegliere l'uovo"
-	}
-});
+import { GlobalStorage, RequestApi } from "AppUtilities";
 
 const styles = StyleSheet.create({
 	container: {
@@ -116,6 +96,15 @@ const styles = StyleSheet.create({
 		width: 30,
 		height: 22,
 	},
+	loadingScene: {
+		position: "absolute",
+		width: AppConfig.windowWidth,
+		height: AppConfig.windowHeight,
+		alignSelf: "stretch",
+		backgroundColor: "rgba(0,0,0,0.5)",
+		alignItems: "center",
+		justifyContent: "center"
+	},
 });
 
 export class Menu extends Component {
@@ -126,7 +115,8 @@ export class Menu extends Component {
 		setCurrentScene: PropTypes.func.isRequired,
 		currentScene: PropTypes.any.isRequired,
 		isOpen: React.PropTypes.bool,
-		user: PropTypes.object
+		user: PropTypes.object,
+		setLanguage: PropTypes.func.isRequired,
 	};
 	static defaultProps = {
 		isOpen: false
@@ -137,18 +127,19 @@ export class Menu extends Component {
 		this.state = {
 			isShowSortsContainer: false,
 			MENU_ITEMS: [
-				{ index: 0, title: "Home" },
-				{ index: 1, title: "News Update" },
-				{ index: 2, title: "Genealogy" },
-				{ index: 3, title: "Trade" },
-				{ index: 4, title: "Exchange Market" },
-				{ index: 5, title: "Products" },
-				{ index: 6, title: "E-Wallet" },
-				{ index: 7, title: "Report" },
-				{ index: 8, title: "Helpdesk" },
-				{ index: 9, title: "My Account" }
+				{ index: 0, title: AppConfig.global_string.home },
+				{ index: 1, title: AppConfig.global_string.newsupdate },
+				{ index: 2, title: AppConfig.global_string.genealogy },
+				{ index: 3, title: AppConfig.global_string.mgntrade },
+				{ index: 4, title: AppConfig.global_string.exchangemarket },
+				{ index: 5, title: AppConfig.global_string.products },
+				{ index: 6, title: AppConfig.global_string.ewallet },
+				{ index: 7, title: AppConfig.global_string.report },
+				{ index: 8, title: AppConfig.global_string.helpdesk },
+				{ index: 9, title: AppConfig.global_string.myaccount }
 			],
 			lang: 'en',
+			isLoading: false,
 		};
 		this.dataSource = new ListView.DataSource({
 			rowHasChanged: (r1, r2) => r1 !== r2
@@ -156,17 +147,12 @@ export class Menu extends Component {
 	}
 
 	componentDidMount() {
-		strings.setLanguage('it');
+		AppConfig.global_string.setLanguage('en');
 	}
 
 	onShowDetail = () => {
 		const { isShowSortsContainer } = this.state;
 		this.setState({ isShowSortsContainer: !isShowSortsContainer });
-	};
-
-	onLaunchSports = () => {
-		const CalendarManager = NativeModules.CalendarManager;
-		CalendarManager.addEvent("card number", "exp month", "exp year", "cvv");
 	};
 
 	onShowProfile = () => {
@@ -175,6 +161,7 @@ export class Menu extends Component {
 	};
 
 	onShowMenu = item => {
+		debugger;
 		this.props.routeScene(item.index);
 		this.props.showSideBar(false);
 	};
@@ -208,7 +195,7 @@ export class Menu extends Component {
 
 					<View style={styles.nameContainer}>
 						<LabelText fontSize={14} color={"white"} style={styles.boldText}>
-							{strings.how}
+							{AppConfig.global_string.myaccount}
 						</LabelText>
 					</View>
 				</TouchableOpacity>
@@ -235,18 +222,134 @@ export class Menu extends Component {
 	};
 
 	onEn = () => {
-		strings.setLanguage('en');
-		this.setState({ lang: 'en', isShowSortsContainer: false });
+		const { lang } = this.state;
+		if (lang === 'en') {
+			AppConfig.global_string.setLanguage('en');
+			this.props.setLanguage('en');
+			this.setState({ lang: 'en', isShowSortsContainer: false, MENU_ITEMS: [
+				{ index: 0, title: AppConfig.global_string.home },
+				{ index: 1, title: AppConfig.global_string.newsupdate },
+				{ index: 2, title: AppConfig.global_string.genealogy },
+				{ index: 3, title: AppConfig.global_string.mgntrade },
+				{ index: 4, title: AppConfig.global_string.exchangemarket },
+				{ index: 5, title: AppConfig.global_string.products },
+				{ index: 6, title: AppConfig.global_string.ewallet },
+				{ index: 7, title: AppConfig.global_string.report },
+				{ index: 8, title: AppConfig.global_string.helpdesk },
+				{ index: 9, title: AppConfig.global_string.myaccount }
+			],  });
+		} else {
+			this.setState({ isLoading: true });
+
+			let body = new FormData();
+			body.append("app_id", 'amgames!@#123');
+			body.append("access_token", AppConfig.accessToken);
+			body.append("language", "en");
+
+			RequestApi(
+				"member_menu/select_language",
+				body,
+				"POST"
+			)
+				.then(response => {
+					if (response.status === "Success") {
+						AppConfig.global_string.setLanguage('en');
+						this.props.setLanguage('en');
+						this.setState({ lang: 'en', isShowSortsContainer: false, isLoading: false, MENU_ITEMS: [
+							{ index: 0, title: AppConfig.global_string.home },
+							{ index: 1, title: AppConfig.global_string.newsupdate },
+							{ index: 2, title: AppConfig.global_string.genealogy },
+							{ index: 3, title: AppConfig.global_string.mgntrade },
+							{ index: 4, title: AppConfig.global_string.exchangemarket },
+							{ index: 5, title: AppConfig.global_string.products },
+							{ index: 6, title: AppConfig.global_string.ewallet },
+							{ index: 7, title: AppConfig.global_string.report },
+							{ index: 8, title: AppConfig.global_string.helpdesk },
+							{ index: 9, title: AppConfig.global_string.myaccount }
+						],  });
+					} else {
+						this.setState({ isLoading: false });
+					}
+				})
+				.catch(error => {
+					alert(error);
+					this.setState({ isLoading: false });
+				});
+		}
 	};
 
 	onCh = () => {
-		strings.setLanguage('ch');
-		this.setState({ lang: 'ch', isShowSortsContainer: false });
+		const { lang } = this.state;
+		if (lang === 'ch') {
+			AppConfig.global_string.setLanguage('ch');
+			this.props.setLanguage('ch');
+			this.setState({ lang: 'ch', isShowSortsContainer: false, MENU_ITEMS: [
+				{ index: 0, title: AppConfig.global_string.home },
+				{ index: 1, title: AppConfig.global_string.newsupdate },
+				{ index: 2, title: AppConfig.global_string.genealogy },
+				{ index: 3, title: AppConfig.global_string.mgntrade },
+				{ index: 4, title: AppConfig.global_string.exchangemarket },
+				{ index: 5, title: AppConfig.global_string.products },
+				{ index: 6, title: AppConfig.global_string.ewallet },
+				{ index: 7, title: AppConfig.global_string.report },
+				{ index: 8, title: AppConfig.global_string.helpdesk },
+				{ index: 9, title: AppConfig.global_string.myaccount }
+			],  });
+		} else {
+			this.setState({ isLoading: true });
+
+			let body = new FormData();
+			body.append("app_id", 'amgames!@#123');
+			body.append("access_token", AppConfig.accessToken);
+			body.append("language", "si_cn");
+
+			RequestApi(
+				"member_menu/select_language",
+				body,
+				"POST"
+			)
+				.then(response => {
+					if (response.status === "Success") {
+						AppConfig.global_string.setLanguage('ch');
+						this.props.setLanguage('ch');
+						this.setState({ lang: 'ch', isShowSortsContainer: false, isLoading: false, MENU_ITEMS: [
+							{ index: 0, title: AppConfig.global_string.home },
+							{ index: 1, title: AppConfig.global_string.newsupdate },
+							{ index: 2, title: AppConfig.global_string.genealogy },
+							{ index: 3, title: AppConfig.global_string.mgntrade },
+							{ index: 4, title: AppConfig.global_string.exchangemarket },
+							{ index: 5, title: AppConfig.global_string.products },
+							{ index: 6, title: AppConfig.global_string.ewallet },
+							{ index: 7, title: AppConfig.global_string.report },
+							{ index: 8, title: AppConfig.global_string.helpdesk },
+							{ index: 9, title: AppConfig.global_string.myaccount }
+						],  });
+					} else {
+						this.setState({ isLoading: false });
+					}
+				})
+				.catch(error => {
+					alert(error);
+					this.setState({ isLoading: false });
+				});
+		}
 	};
 
 	onMl = () => {
-		strings.setLanguage('ml');
-		this.setState({ lang: 'ml', isShowSortsContainer: false });
+		AppConfig.global_string.setLanguage('ml');
+		this.props.setLanguage('ml');
+		this.setState({ lang: 'ml', isShowSortsContainer: false, MENU_ITEMS: [
+			{ index: 0, title: AppConfig.global_string.home },
+			{ index: 1, title: AppConfig.global_string.newsupdate },
+			{ index: 2, title: AppConfig.global_string.genealogy },
+			{ index: 3, title: AppConfig.global_string.mgntrade },
+			{ index: 4, title: AppConfig.global_string.exchangemarket },
+			{ index: 5, title: AppConfig.global_string.products },
+			{ index: 6, title: AppConfig.global_string.ewallet },
+			{ index: 7, title: AppConfig.global_string.report },
+			{ index: 8, title: AppConfig.global_string.helpdesk },
+			{ index: 9, title: AppConfig.global_string.myaccount }
+		], });
 	};
 
 	renderLang = () => {
@@ -287,11 +390,18 @@ export class Menu extends Component {
 	};
 
 	render() {
+		const { isLoading } = this.state;
 		return (
 			<View style={styles.container}>
 				{this.renderHeader()}
 				{this.renderLang()}
 				{this.renderContent()}
+				{
+					isLoading &&
+					<View style={styles.loadingScene}>
+						<ActivityIndicator animating={true} size="small" color="white" />
+					</View>
+				}
 			</View>
 		);
 	}

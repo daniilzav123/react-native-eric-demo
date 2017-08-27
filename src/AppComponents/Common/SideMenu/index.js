@@ -72,7 +72,8 @@ export class SideMenu extends React.Component {
 		currentScene: PropTypes.any.isRequired,
 		showSideBar: PropTypes.func,
 		disableSideBar: PropTypes.func,
-		user: PropTypes.object
+		user: PropTypes.object,
+		setLanguage: PropTypes.func,
 	};
 
 	static defaultProps = {
@@ -242,7 +243,8 @@ export class SideMenu extends React.Component {
 			showSideBar,
 			disableSideBar,
 			isOpen,
-			user
+			user,
+			setLanguage,
 		} = this.props;
 		const menu = (
 			<Menu
@@ -253,6 +255,7 @@ export class SideMenu extends React.Component {
 				currentScene={currentScene}
 				isOpen={isOpen}
 				user={user}
+				setLanguage={setLanguage}
 			/>
 		);
 		const { width, openMenuOffset } = this.state;

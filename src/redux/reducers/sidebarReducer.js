@@ -17,6 +17,11 @@ export const sidebar = (state = defaultValues.sidebar, action) => {
 			newState.currentScene = action.payload;
 			return newState;
 		}
+		case SideBarActions.SET_LANGUAGE: {
+			const newState = { ...state };
+			newState.language = action.payload;
+			return newState;
+		}
 		default:
 			return state;
 	}

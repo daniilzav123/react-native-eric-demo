@@ -149,6 +149,7 @@ class _MainScene extends Component {
 	render() {
 		const { isLoading } = this.state;
 		const { dashboard_data } = AppConfig;
+		AppConfig.global_string.setLanguage(this.props.sidebar.language);
 		return (
 			<View style={styles.container}>
 				<HeaderBar
