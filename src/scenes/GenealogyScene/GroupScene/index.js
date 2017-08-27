@@ -6,9 +6,10 @@ import {
 	StyleSheet,
 	Text,
 	TouchableOpacity,
+	ActivityIndicator,
 } from "react-native";
 import AppConfig from "AppConfig";
-import { GlobalStorage } from "AppUtilities";
+import { GlobalStorage, RequestApi } from "AppUtilities";
 import { HeaderBar, Tree } from "AppComponents"
 
 const styles = StyleSheet.create({
@@ -18,6 +19,15 @@ const styles = StyleSheet.create({
 	},
 	treeContainer: {
 		paddingTop: 20,
+	},
+	loadingScene: {
+		position: "absolute",
+		width: AppConfig.windowWidth,
+		height: AppConfig.windowHeight,
+		alignSelf: "stretch",
+		backgroundColor: "rgba(0,0,0,0.5)",
+		alignItems: "center",
+		justifyContent: "center"
 	},
 });
 
@@ -35,6 +45,7 @@ class _GroupScene extends Component {
 		super(props, context);
 		this.state = {
 			scale: 1.0,
+			isLoading: false,
 		};
 	}
 
@@ -42,6 +53,31 @@ class _GroupScene extends Component {
 		this.props.showSideBar(false);
 		this.props.disableSideBar(false);
 		this.props.setCurrentScene("GroupScene");
+
+		this.setState({ isLoading: true });
+
+		let body = new FormData();
+		body.append("app_id", 'amgames!@#123');
+		body.append("access_token", AppConfig.accessToken);
+		body.append("sec_pass", "icentel..win");
+
+		RequestApi(
+			"member_network/binarytree",
+			body,
+			"POST"
+		)
+			.then(response => {
+				if (response.status === "Success") {
+					AppConfig.group_data = response;
+					this.setState({ isLoading: false });
+				} else {
+					this.setState({ isLoading: false });
+				}
+			})
+			.catch(error => {
+				alert(error);
+				this.setState({ isLoading: false });
+			});
 	}
 
 	onMenu = () => {
@@ -53,8 +89,9 @@ class _GroupScene extends Component {
 	};
 
 	onRegister = (x, y) => {
-		alert(x);
-		alert(y);
+		this.props.navigation.navigate("RegisterNewMember", {
+			x, y
+		})
 	};
 
 	onScaleUp = () => {
@@ -72,6 +109,7 @@ class _GroupScene extends Component {
 	};
 
 	render() {
+		const { isLoading } = this.state;
 		const test_treedata1 = {
 			root: {
 				name: "root",
@@ -136,7 +174,7 @@ class _GroupScene extends Component {
 					spec="Group"
 				/>
 				<View style={styles.treeContainer}>
-					<Tree treeData={test_treedata1} register={this.onRegister} scale={this.state.scale}/>
+					<Tree treeData={AppConfig.group_data} register={this.onRegister} scale={this.state.scale}/>
 				</View>
 				{/*<View style={{*/}
 					{/*flexDirection: 'row',*/}
@@ -163,6 +201,12 @@ class _GroupScene extends Component {
 						<Text>Scale Down</Text>
 					</TouchableOpacity>
 				</View>
+				{
+					isLoading &&
+					<View style={styles.loadingScene}>
+						<ActivityIndicator animating={true} size="small" color="white" />
+					</View>
+				}
 			</View>
 		);
 	}

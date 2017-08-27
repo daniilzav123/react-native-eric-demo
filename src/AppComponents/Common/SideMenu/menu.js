@@ -15,6 +15,28 @@ import {
 	YELLOW_COLOR,
 } from "AppColors";
 import { LabelText } from "AppFonts";
+import LocalizedStrings from 'react-native-localization';
+
+const strings = new LocalizedStrings({
+	en:{
+		how:"How?",
+		boiledEgg:"Boiled egg",
+		softBoiledEgg:"Soft-boiled egg",
+		choice:"How to choose the egg"
+	},
+	ch: {
+		how:"你是谁?",
+		boiledEgg:"Uovo sodo",
+		softBoiledEgg:"Uovo alla coque",
+		choice:"Come scegliere l'uovo"
+	},
+	ml: {
+		how:"Come?",
+		boiledEgg:"Uovo sodo",
+		softBoiledEgg:"Uovo alla coque",
+		choice:"Come scegliere l'uovo"
+	}
+});
 
 const styles = StyleSheet.create({
 	container: {
@@ -89,7 +111,11 @@ const styles = StyleSheet.create({
 	},
 	nameContainer: {
 		marginLeft: 15
-	}
+	},
+	langImg: {
+		width: 30,
+		height: 22,
+	},
 });
 
 export class Menu extends Component {
@@ -121,11 +147,16 @@ export class Menu extends Component {
 				{ index: 7, title: "Report" },
 				{ index: 8, title: "Helpdesk" },
 				{ index: 9, title: "My Account" }
-			]
+			],
+			lang: 'en',
 		};
 		this.dataSource = new ListView.DataSource({
 			rowHasChanged: (r1, r2) => r1 !== r2
 		});
+	}
+
+	componentDidMount() {
+		strings.setLanguage('it');
 	}
 
 	onShowDetail = () => {
@@ -149,7 +180,7 @@ export class Menu extends Component {
 	};
 
 	renderHeader = () => {
-		const { isShowSortsContainer } = this.state;
+		const { lang, isShowSortsContainer } = this.state;
 		const iconName = isShowSortsContainer
 			? require("img/icon_up_white.png")
 			: require("img/icon_down_white.png");
@@ -177,9 +208,13 @@ export class Menu extends Component {
 
 					<View style={styles.nameContainer}>
 						<LabelText fontSize={14} color={"white"} style={styles.boldText}>
-							My Account
+							{strings.how}
 						</LabelText>
 					</View>
+				</TouchableOpacity>
+
+				<TouchableOpacity style={{ marginLeft: 80 }} onPress={this.onShowDetail}>
+					<Image style={styles.langImg} source={lang === 'en' ? require('img/lang_en.png') : lang === 'ch' ? require('img/lang_ch.png') : require('img/lang_ml.png')}/>
 				</TouchableOpacity>
 				<View style={styles.space} />
 			</View>
@@ -197,6 +232,44 @@ export class Menu extends Component {
 				</LabelText>
 			</TouchableOpacity>
 		);
+	};
+
+	onEn = () => {
+		strings.setLanguage('en');
+		this.setState({ lang: 'en', isShowSortsContainer: false });
+	};
+
+	onCh = () => {
+		strings.setLanguage('ch');
+		this.setState({ lang: 'ch', isShowSortsContainer: false });
+	};
+
+	onMl = () => {
+		strings.setLanguage('ml');
+		this.setState({ lang: 'ml', isShowSortsContainer: false });
+	};
+
+	renderLang = () => {
+		const { isShowSortsContainer } = this.state;
+		if (isShowSortsContainer) {
+			return (
+				<View style={{ height: 50, backgroundColor: 'white', flexDirection: 'row' }}>
+					<TouchableOpacity style={{width: 30, height: 22, marginLeft: 30, marginTop: 14}} onPress={this.onEn}>
+						<Image source={require('img/lang_en.png')} style={{width: 30, height: 22}}/>
+					</TouchableOpacity>
+					<TouchableOpacity style={{width: 30, height: 22, marginLeft: 40, marginTop: 14}} onPress={this.onCh}>
+						<Image source={require('img/lang_ch.png')} style={{width: 30, height: 22}}/>
+					</TouchableOpacity>
+					<TouchableOpacity style={{width: 30, height: 22, marginLeft: 40, marginTop: 14}} onPress={this.onMl}>
+						<Image source={require('img/lang_ml.png')} style={{width: 30, height: 22}}/>
+					</TouchableOpacity>
+				</View>
+			)
+		} else {
+			return (
+				<View/>
+			)
+		}
 	};
 
 	renderContent = () => {
@@ -217,6 +290,7 @@ export class Menu extends Component {
 		return (
 			<View style={styles.container}>
 				{this.renderHeader()}
+				{this.renderLang()}
 				{this.renderContent()}
 			</View>
 		);

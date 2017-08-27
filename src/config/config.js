@@ -25,4 +25,5 @@ export default {
 	news_data: [],
 	bank_data: [],
 	sponsor_data: [],
+	group_data: [],
 };

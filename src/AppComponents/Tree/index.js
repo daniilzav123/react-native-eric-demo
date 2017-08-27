@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 
 export class Tree extends Component {
 	static propTypes = {
-		treeData: PropTypes.object,
+		treeData: PropTypes.any,
 		register: PropTypes.func,
 		scale: PropTypes.number,
 	};
@@ -92,232 +92,233 @@ export class Tree extends Component {
 	};
 
 	checkTree = (i, j) => {
+		debugger;
 		const { treeData } = this.props;
 		if (i === 0) {
 			return "Root";
 		} else if (i === 1) {
-			if (treeData.root.child === undefined) {
+			if (treeData.data.child === undefined) {
 				return "null";
 			}
 			if (this.matrix[1][j] === 1) {
-				if (treeData.root.child.L !== undefined) {
-					return treeData.root.child.L.name;
+				if (treeData.data.child.L !== undefined) {
+					return treeData.data.child.L.name;
 				} else {
 					return "+"
 				}
 			} else {
-				if (treeData.root.child.R !== undefined) {
-					return treeData.root.child.R.name;
+				if (treeData.data.child.R !== undefined) {
+					return treeData.data.child.R.name;
 				} else {
 					return "+"
 				}
 			}
 		} else if (i === 2) {
-			if (treeData.root.child === undefined) {
+			if (treeData.data.child === undefined) {
 				return "null";
 			}
 			if (this.matrix[2][j] === 1) {
-				if (treeData.root.child.L === undefined) {
+				if (treeData.data.child.L === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.L.child === undefined) {
+				if (treeData.data.child.L.child === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.L.child.L !== undefined) {
-					return treeData.root.child.L.child.L.name;
+				if (treeData.data.child.L.child.L !== undefined) {
+					return treeData.data.child.L.child.L.name;
 				} else {
 					return "+"
 				}
 			} else if (this.matrix[2][j] === 3) {
-				if (treeData.root.child.L === undefined) {
+				if (treeData.data.child.L === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.L.child === undefined) {
+				if (treeData.data.child.L.child === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.L.child.R !== undefined) {
-					return treeData.root.child.L.child.R.name;
+				if (treeData.data.child.L.child.R !== undefined) {
+					return treeData.data.child.L.child.R.name;
 				} else {
 					return "+"
 				}
 			} else if (this.matrix[2][j] === 5) {
-				if (treeData.root.child.R === undefined) {
+				if (treeData.data.child.R === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.R.child === undefined) {
+				if (treeData.data.child.R.child === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.R.child.L !== undefined) {
-					return treeData.root.child.R.child.L.name;
+				if (treeData.data.child.R.child.L !== undefined) {
+					return treeData.data.child.R.child.L.name;
 				} else {
 					return "+"
 				}
 			} else {
-				if (treeData.root.child.R === undefined) {
+				if (treeData.data.child.R === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.R.child === undefined) {
+				if (treeData.data.child.R.child === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.R.child.R !== undefined) {
-					return treeData.root.child.R.child.R.name;
+				if (treeData.data.child.R.child.R !== undefined) {
+					return treeData.data.child.R.child.R.name;
 				} else {
 					return "+"
 				}
 			}
 		} else if (i === 3) {
-			if (treeData.root.child === undefined) {
+			if (treeData.data.child === undefined) {
 				return "null";
 			}
 			if (this.matrix[3][j] === 1) {
-				if (treeData.root.child.L === undefined) {
+				if (treeData.data.child.L === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.L.child === undefined) {
+				if (treeData.data.child.L.child === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.L.child.L === undefined) {
+				if (treeData.data.child.L.child.L === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.L.child.L.child === undefined) {
+				if (treeData.data.child.L.child.L.child === undefined) {
 					return "+";
 				}
 
-				if (treeData.root.child.L.child.L.child.L !== undefined) {
-					return treeData.root.child.L.child.L.child.L.name;
+				if (treeData.data.child.L.child.L.child.L !== undefined) {
+					return treeData.data.child.L.child.L.child.L.name;
 				} else {
 					return "+";
 				}
 			} else if (this.matrix[3][j] === 3) {
-				if (treeData.root.child.L === undefined) {
+				if (treeData.data.child.L === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.L.child === undefined) {
+				if (treeData.data.child.L.child === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.L.child.L === undefined) {
+				if (treeData.data.child.L.child.L === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.L.child.L.child === undefined) {
+				if (treeData.data.child.L.child.L.child === undefined) {
 					return "+";
 				}
 
-				if (treeData.root.child.L.child.L.child.R !== undefined) {
-					return treeData.root.child.L.child.L.child.R.name;
+				if (treeData.data.child.L.child.L.child.R !== undefined) {
+					return treeData.data.child.L.child.L.child.R.name;
 				} else {
 					return "+";
 				}
 			} else if (this.matrix[3][j] === 5) {
-				if (treeData.root.child.L === undefined) {
+				if (treeData.data.child.L === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.L.child === undefined) {
+				if (treeData.data.child.L.child === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.L.child.R === undefined) {
+				if (treeData.data.child.L.child.R === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.L.child.R.child === undefined) {
+				if (treeData.data.child.L.child.R.child === undefined) {
 					return "+";
 				}
 
-				if (treeData.root.child.L.child.R.child.L !== undefined) {
-					return treeData.root.child.L.child.R.child.L.name;
+				if (treeData.data.child.L.child.R.child.L !== undefined) {
+					return treeData.data.child.L.child.R.child.L.name;
 				} else {
 					return "+";
 				}
 			} else if (this.matrix[3][j] === 7) {
-				if (treeData.root.child.L === undefined) {
+				if (treeData.data.child.L === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.L.child === undefined) {
+				if (treeData.data.child.L.child === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.L.child.R === undefined) {
+				if (treeData.data.child.L.child.R === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.L.child.R.child === undefined) {
+				if (treeData.data.child.L.child.R.child === undefined) {
 					return "+";
 				}
 
-				if (treeData.root.child.L.child.R.child.R !== undefined) {
-					return treeData.root.child.L.child.R.child.R.name;
+				if (treeData.data.child.L.child.R.child.R !== undefined) {
+					return treeData.data.child.L.child.R.child.R.name;
 				} else {
 					return "+";
 				}
 			} else if (this.matrix[3][j] === 9) {
-				if (treeData.root.child.R === undefined) {
+				if (treeData.data.child.R === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.R.child === undefined) {
+				if (treeData.data.child.R.child === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.R.child.L === undefined) {
+				if (treeData.data.child.R.child.L === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.R.child.L.child === undefined) {
+				if (treeData.data.child.R.child.L.child === undefined) {
 					return "+";
 				}
 
-				if (treeData.root.child.R.child.L.child.L !== undefined) {
-					return treeData.root.child.R.child.L.child.L.name;
+				if (treeData.data.child.R.child.L.child.L !== undefined) {
+					return treeData.data.child.R.child.L.child.L.name;
 				} else {
 					return "+";
 				}
 			} else if (this.matrix[3][j] === 11) {
-				if (treeData.root.child.R === undefined) {
+				if (treeData.data.child.R === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.R.child === undefined) {
+				if (treeData.data.child.R.child === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.R.child.L === undefined) {
+				if (treeData.data.child.R.child.L === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.R.child.L.child === undefined) {
+				if (treeData.data.child.R.child.L.child === undefined) {
 					return "+";
 				}
 
-				if (treeData.root.child.R.child.L.child.R !== undefined) {
-					return treeData.root.child.R.child.L.child.R.name;
+				if (treeData.data.child.R.child.L.child.R !== undefined) {
+					return treeData.data.child.R.child.L.child.R.name;
 				} else {
 					return "+";
 				}
 			} else if (this.matrix[3][j] === 13) {
-				if (treeData.root.child.R === undefined) {
+				if (treeData.data.child.R === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.R.child === undefined) {
+				if (treeData.data.child.R.child === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.R.child.R === undefined) {
+				if (treeData.data.child.R.child.R === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.R.child.R.child === undefined) {
+				if (treeData.data.child.R.child.R.child === undefined) {
 					return "+";
 				}
 
-				if (treeData.root.child.R.child.R.child.L !== undefined) {
-					return treeData.root.child.R.child.R.child.L.name;
+				if (treeData.data.child.R.child.R.child.L !== undefined) {
+					return treeData.data.child.R.child.R.child.L.name;
 				} else {
 					return "+";
 				}
 			} else if (this.matrix[3][j] === 15) {
-				if (treeData.root.child.R === undefined) {
+				if (treeData.data.child.R === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.R.child === undefined) {
+				if (treeData.data.child.R.child === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.R.child.R === undefined) {
+				if (treeData.data.child.R.child.R === undefined) {
 					return "null";
 				}
-				if (treeData.root.child.R.child.R.child === undefined) {
+				if (treeData.data.child.R.child.R.child === undefined) {
 					return "+";
 				}
 
-				if (treeData.root.child.R.child.R.child.R !== undefined) {
-					return treeData.root.child.R.child.R.child.R.name;
+				if (treeData.data.child.R.child.R.child.R !== undefined) {
+					return treeData.data.child.R.child.R.child.R.name;
 				} else {
 					return "+";
 				}
@@ -326,6 +327,11 @@ export class Tree extends Component {
 	};
 
 	render() {
+		if (this.props.treeData.length === 0) {
+			return (
+				<View/>
+			)
+		}
 		return (
 			<ScrollView
 				horizontal={true}
