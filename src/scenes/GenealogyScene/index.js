@@ -143,16 +143,16 @@ class _GenealogyScene extends Component {
 
 	render() {
 		const { isLoading } = this.state;
-		const { sponsor_data } = AppConfig;
+		const { sponsor_data, global_string } = AppConfig;
 		return (
 			<View style={styles.container}>
 				<HeaderBar
-					cenTitle="Genealogy"
+					cenTitle={AppConfig.global_string.genealogy}
 					onMenu={this.onMenu}
 				/>
 				<KeyboardAwareScrollView>
 					<View style={styles.accessContainer}>
-						<Text style={styles.redTxt}>Sponsor</Text>
+						<Text style={styles.redTxt}>{global_string.sponsor}</Text>
 						<View style={styles.margin}/>
 						<ListView
 							dataSource={this.ds.cloneWithRows(sponsor_data)}
@@ -163,10 +163,10 @@ class _GenealogyScene extends Component {
 					</View>
 				</KeyboardAwareScrollView>
 				<TouchableOpacity style={styles.groupBtn} onPress={this.onGroup}>
-					<Text style={{ color: 'white' }}>Group</Text>
+					<Text style={{ color: 'white' }}>{global_string.group}</Text>
 				</TouchableOpacity>
 				<TouchableOpacity style={styles.registerBtn} onPress={this.newMember}>
-					<Text style={{ color: 'white' }}>Register New Member</Text>
+					<Text style={{ color: 'white' }}>{global_string.registernewmember}</Text>
 				</TouchableOpacity>
 				{
 					isLoading &&

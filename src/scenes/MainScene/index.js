@@ -148,18 +148,18 @@ class _MainScene extends Component {
 
 	render() {
 		const { isLoading } = this.state;
-		const { dashboard_data } = AppConfig;
+		const { dashboard_data, global_string } = AppConfig;
 		AppConfig.global_string.setLanguage(this.props.sidebar.language);
 		return (
 			<View style={styles.container}>
 				<HeaderBar
-					cenTitle="Dashboard"
+					cenTitle={AppConfig.global_string.home}
 					onMenu={this.onMenu}
 				/>
 				<KeyboardAwareScrollView>
 					<View style={styles.priceContainer}>
 						<View>
-							<Text style={styles.upTxt}>CASH POINT</Text>
+							<Text style={styles.upTxt}>{global_string.cashpoint}</Text>
 							<Text style={styles.downTxt}>${
 								dashboard_data.length === 0 ? 0 : dashboard_data.ewallet_details.CP.balance
 							}.00</Text>
@@ -167,7 +167,7 @@ class _MainScene extends Component {
 						</View>
 
 						<View>
-							<Text style={styles.upTxt}>TRADE POINT</Text>
+							<Text style={styles.upTxt}>{global_string.tradepoint}</Text>
 							<Text style={styles.downTxt}>${
 								dashboard_data.length === 0 ? 0 : dashboard_data.ewallet_details.TP.balance
 							}.00</Text>
@@ -175,7 +175,7 @@ class _MainScene extends Component {
 						</View>
 
 						<View>
-							<Text style={styles.upTxt}>BONUS TRADE POINT</Text>
+							<Text style={styles.upTxt}>{global_string.bonustradepoint}</Text>
 							<Text style={styles.downTxt}>${
 								dashboard_data.length === 0 ? 0 : dashboard_data.ewallet_details.BTP.balance
 							}.00</Text>
@@ -183,7 +183,7 @@ class _MainScene extends Component {
 						</View>
 
 						<View>
-							<Text style={styles.upTxt}>GAME POINT</Text>
+							<Text style={styles.upTxt}>{global_string.gamepoint}</Text>
 							<Text style={styles.downTxt}>${
 								dashboard_data.length === 0 ? 0 : dashboard_data.ewallet_details.GP.balance
 							}.00</Text>
@@ -193,59 +193,59 @@ class _MainScene extends Component {
 					</View>
 
 					<View style={styles.accountOverView}>
-						<Text style={styles.redTxt}>My Account Overview</Text>
+						<Text style={styles.redTxt}>{global_string.myaccountoverview}</Text>
 
 						<View style={styles.line}>
-							<Text style={styles.leftTxt}>Achieved Rank</Text>
+							<Text style={styles.leftTxt}>{global_string.achievedrank}</Text>
 							<Text style={styles.rightTxt}>{
 								dashboard_data.length === 0 ? "" : dashboard_data.rank_details
 							}</Text>
 						</View>
 
 						<View style={styles.line}>
-							<Text style={styles.leftTxt}>Name</Text>
+							<Text style={styles.leftTxt}>{global_string.name}</Text>
 							<Text style={styles.rightTxt}>{
 								dashboard_data.length === 0 ? "" : dashboard_data.name
 							}</Text>
 						</View>
 
 						<View style={styles.line}>
-							<Text style={styles.leftTxt}>ID</Text>
+							<Text style={styles.leftTxt}>{global_string.id}</Text>
 							<Text style={styles.rightTxt}>{
 								dashboard_data.length === 0 ? "" : dashboard_data.id
 							}</Text>
 						</View>
 
 						<View style={styles.line}>
-							<Text style={styles.leftTxt}>Investment</Text>
+							<Text style={styles.leftTxt}>{global_string.investment}</Text>
 							<Text style={styles.rightTxt}>{
 								dashboard_data.length === 0 ? "" : dashboard_data.investment
 							}</Text>
 						</View>
 
 						<View style={styles.line}>
-							<Text style={styles.leftTxt}>Email</Text>
+							<Text style={styles.leftTxt}>{global_string.email}</Text>
 							<Text style={styles.rightTxt}>{
 								dashboard_data.length === 0 ? "" : dashboard_data.email
 							}</Text>
 						</View>
 
 						<View style={styles.line}>
-							<Text style={styles.leftTxt}>Sponsored Members</Text>
+							<Text style={styles.leftTxt}>{global_string.sponsoredmembers}</Text>
 							<Text style={styles.rightTxt}>{
 								dashboard_data.length === 0 ? "" : dashboard_data.sponsored_member
 							}</Text>
 						</View>
 
 						<View style={styles.line}>
-							<Text style={styles.leftTxt}>Sponsored BV</Text>
+							<Text style={styles.leftTxt}>{global_string.sponsoredbv}</Text>
 							<Text style={styles.rightTxt}>{
 								dashboard_data.length === 0 ? "" : dashboard_data.sponsored_bv
 							}</Text>
 						</View>
 
 						<View style={styles.line}>
-							<Text style={styles.leftTxt}>E-Profit Max Cap</Text>
+							<Text style={styles.leftTxt}>{global_string.eprofitmaxcap}</Text>
 							<Text style={styles.rightTxt}>{
 								dashboard_data.length === 0 ? "" : dashboard_data["e-profit_cap"]
 							}</Text>

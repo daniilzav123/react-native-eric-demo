@@ -47,7 +47,7 @@ class _ProductScene extends Component {
 		return (
 			<View style={styles.container}>
 				<HeaderBar
-					cenTitle="Products"
+					cenTitle={AppConfig.global_string.products}
 					onMenu={this.onMenu}
 				/>
 			</View>

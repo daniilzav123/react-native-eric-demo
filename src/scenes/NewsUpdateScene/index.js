@@ -145,7 +145,7 @@ class _NewsUpdateScene extends Component {
 		return (
 			<View style={styles.container}>
 				<HeaderBar
-					cenTitle="News Update"
+					cenTitle={AppConfig.global_string.newsupdate}
 					onMenu={this.onMenu}
 				/>
 				<ListView

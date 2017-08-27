@@ -47,7 +47,7 @@ class _ExchangeMarketScene extends Component {
 		return (
 			<View style={styles.container}>
 				<HeaderBar
-					cenTitle="Exchange Market"
+					cenTitle={AppConfig.global_string.exchangemarket}
 					onMenu={this.onMenu}
 				/>
 			</View>

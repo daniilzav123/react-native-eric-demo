@@ -169,7 +169,7 @@ class _GroupScene extends Component {
 		return (
 			<View style={styles.container}>
 				<HeaderBar
-					cenTitle="Group"
+					cenTitle={AppConfig.global_string.group}
 					back={this.onBack}
 					spec="Group"
 				/>

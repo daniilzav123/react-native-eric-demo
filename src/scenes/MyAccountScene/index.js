@@ -175,7 +175,7 @@ class _MyAccountScene extends Component {
 		return (
 			<View style={styles.container}>
 				<HeaderBar
-					cenTitle="My Account"
+					cenTitle={AppConfig.global_string.myaccount}
 					onMenu={this.onMenu}
 				/>
 				<KeyboardAwareScrollView>

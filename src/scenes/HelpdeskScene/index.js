@@ -78,7 +78,7 @@ class _HelpdeskScene extends Component {
 		return (
 			<View style={styles.container}>
 				<HeaderBar
-					cenTitle="Helpdesk"
+					cenTitle={AppConfig.global_string.helpdesk}
 					onMenu={this.onMenu}
 					spec="Helpdesk"
 					onAddTicket={this.onAddTicket}

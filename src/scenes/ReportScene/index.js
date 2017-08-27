@@ -55,7 +55,7 @@ class _ReportScene extends Component {
 		return (
 			<View style={styles.container}>
 				<HeaderBar
-					cenTitle="Report"
+					cenTitle={AppConfig.global_string.report}
 					onMenu={this.onMenu}
 				/>
 				<View

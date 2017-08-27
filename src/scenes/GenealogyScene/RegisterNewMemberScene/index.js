@@ -100,7 +100,7 @@ class _RegisterNewMemberScene extends Component {
 		return (
 			<View style={styles.container}>
 				<HeaderBar
-					cenTitle="Register New Member"
+					cenTitle={AppConfig.global_string.registernewmember}
 					back={this.onBack}
 					spec="RegisterNewMember"
 				/>

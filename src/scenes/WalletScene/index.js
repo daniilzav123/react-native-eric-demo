@@ -96,7 +96,7 @@ class _WalletScene extends Component {
 		return (
 			<View style={styles.container}>
 				<HeaderBar
-					cenTitle="E-Wallet"
+					cenTitle={AppConfig.global_string.ewallet}
 					onMenu={this.onMenu}
 				/>
 				<KeyboardAwareScrollView>

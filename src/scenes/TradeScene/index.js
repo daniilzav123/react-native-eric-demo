@@ -63,15 +63,16 @@ class _TradeScene extends Component {
 	};
 
 	render() {
+		const { global_string } = AppConfig;
 		return (
 			<View style={styles.container}>
 				<HeaderBar
-					cenTitle="Trade"
+					cenTitle={global_string.trade}
 					onMenu={this.onMenu}
 				/>
 				<View style={styles.accessContainer}>
 					<TouchableOpacity style={styles.access} onPress={this.open}>
-						<Text style={{ color: 'white' }}>Access Platform (MGN)</Text>
+						<Text style={{ color: 'white' }}>{global_string.accessplatform}</Text>
 					</TouchableOpacity>
 				</View>
 			</View>

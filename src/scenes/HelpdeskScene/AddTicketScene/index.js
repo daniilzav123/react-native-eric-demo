@@ -84,20 +84,21 @@ class _AddTicketScene extends Component {
 	};
 
 	render() {
+		const { global_string } = AppConfig;
 		return (
 			<View style={styles.container}>
 				<HeaderBar
-					cenTitle="Add Ticket"
+					cenTitle={global_string.addmessage}
 					spec="AddTicket"
 					back={this.onBack}
 				/>
 				<KeyboardAwareScrollView>
 					<View style={styles.content}>
-						<Text style={styles.txt}>Subject</Text>
+						<Text style={styles.txt}>{global_string.subject}</Text>
 						<TextInput
 							style={styles.subjectInput}
 						/>
-						<Text style={styles.txt}>Question</Text>
+						<Text style={styles.txt}>{global_string.question}</Text>
 						<TextInput
 							style={styles.subjectInput}
 						/>
