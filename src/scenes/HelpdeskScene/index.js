@@ -6,10 +6,12 @@ import {
 	StyleSheet,
 	Text,
 	TouchableOpacity,
+	ActivityIndicator,
+	ListView,
 } from "react-native";
 import AppConfig from "AppConfig";
-import { GlobalStorage } from "AppUtilities";
-import { HeaderBar } from "AppComponents"
+import { GlobalStorage, RequestApi } from "AppUtilities";
+import { HeaderBar } from "AppComponents";
 
 const styles = StyleSheet.create({
 	container: {
@@ -31,11 +33,39 @@ const styles = StyleSheet.create({
 		height: AppConfig.windowHeight,
 		backgroundColor: "transparent"
 	},
+	loadingScene: {
+		position: "absolute",
+		width: AppConfig.windowWidth,
+		height: AppConfig.windowHeight,
+		alignSelf: "stretch",
+		backgroundColor: "rgba(0,0,0,0.5)",
+		alignItems: "center",
+		justifyContent: "center"
+	},
+	priceContainer: {
+		width: AppConfig.windowWidth - 60,
+		marginLeft: 30,
+		justifyContent: 'flex-start',
+		marginTop: 30,
+		backgroundColor: "#fff",
+		paddingHorizontal: 15,
+		paddingBottom: 10,
+		borderBottomLeftRadius: 5,
+		borderBottomRightRadius: 5,
+		shadowColor: "#000",
+		shadowOpacity: 0.4,
+		shadowRadius: 6,
+		shadowOffset: {
+			height: 5,
+			width: 0
+		}
+	},
 	line: {
 		flexDirection: 'row',
-		paddingHorizontal: 10,
-		justifyContent: 'space-between'
-	}
+		marginTop: 15,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
 });
 
 class _HelpdeskScene extends Component {
@@ -51,13 +81,42 @@ class _HelpdeskScene extends Component {
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
+			isLoading: false,
 		};
+		this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 	}
 
 	componentDidMount() {
 		this.props.showSideBar(false);
 		this.props.disableSideBar(false);
 		this.props.setCurrentScene("HelpdeskScene");
+
+		this.setState({ isLoading: true });
+
+		let body = new FormData();
+		body.append("app_id", 'amgames!@#123');
+		body.append("access_token", AppConfig.accessToken);
+		body.append("ticket_status", "open");
+		body.append("page_no", "2");
+		body.append("sortby", "ASC");
+
+		RequestApi(
+			"member_helpdesk/helpdesk",
+			body,
+			"POST"
+		)
+			.then(response => {
+				if (response.status === "Success") {
+					AppConfig.ticket_data = response.data;
+					this.setState({ isLoading: false });
+				} else {
+					this.setState({ isLoading: false });
+				}
+			})
+			.catch(error => {
+				alert(error);
+				this.setState({ isLoading: false });
+			});
 	}
 
 	onMenu = () => {
@@ -65,7 +124,32 @@ class _HelpdeskScene extends Component {
 	};
 
 	updateDatas = () => {
-		alert('update');
+		this.setState({ isLoading: true });
+
+		let body = new FormData();
+		body.append("app_id", 'amgames!@#123');
+		body.append("access_token", AppConfig.accessToken);
+		body.append("ticket_status", "open");
+		body.append("page_no", "2");
+		body.append("sortby", "ASC");
+
+		RequestApi(
+			"member_helpdesk/helpdesk",
+			body,
+			"POST"
+		)
+			.then(response => {
+				if (response.status === "Success") {
+					AppConfig.ticket_data = response.data;
+					this.setState({ isLoading: false });
+				} else {
+					this.setState({ isLoading: false });
+				}
+			})
+			.catch(error => {
+				alert(error);
+				this.setState({ isLoading: false });
+			});
 	};
 
 	onAddTicket = () => {
@@ -74,7 +158,24 @@ class _HelpdeskScene extends Component {
 		});
 	};
 
+	renderRow = (rowData, sectionID, rowID) => {
+		return (
+			<View style={styles.priceContainer}>
+				<View style={styles.line}>
+					<Text>{AppConfig.global_string.subject}: </Text>
+					<Text>{rowData.title}</Text>
+				</View>
+				<View style={styles.line}>
+					<Text>Department Name: </Text>
+					<Text>{rowData.dept}</Text>
+				</View>
+			</View>
+		);
+	};
+
 	render() {
+		const { isLoading } = this.state;
+		const { ticket_data } = AppConfig;
 		return (
 			<View style={styles.container}>
 				<HeaderBar
@@ -83,6 +184,18 @@ class _HelpdeskScene extends Component {
 					spec="Helpdesk"
 					onAddTicket={this.onAddTicket}
 				/>
+				<ListView
+					dataSource={this.ds.cloneWithRows(ticket_data)}
+					renderRow={this.renderRow}
+					enableEmptySections={true}
+					removeClippedSubviews={false}
+				/>
+				{
+					isLoading &&
+					<View style={styles.loadingScene}>
+						<ActivityIndicator animating={true} size="small" color="white" />
+					</View>
+				}
 			</View>
 		);
 	}

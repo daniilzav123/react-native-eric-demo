@@ -365,7 +365,7 @@ class ModalDropdown extends Component {
       accessible: this.props.accessible,
       onPress: () => this._onRowPress(rowData, sectionID, rowID, highlightRow)
     };
-    if (TOUCHABLE_ELEMENTS.find(name => name == row.type.displayName)) {
+    if (TOUCHABLE_ELEMENTS.find(name => name === row.type.displayName)) {
       let props = { ...row.props };
       props.key = preservedProps.key;
       props.onPress = preservedProps.onPress;

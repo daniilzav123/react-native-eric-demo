@@ -188,5 +188,7 @@ export default {
 	bank_data: [],
 	sponsor_data: [],
 	group_data: [],
+	ticket_data: [],
+	dep_data: [],
 	global_string: strings,
 };

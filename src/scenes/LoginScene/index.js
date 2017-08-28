@@ -107,7 +107,7 @@ class _LoginScene extends Component {
 
 		let body = new FormData();
 		body.append("app_id", 'amgames!@#123');
-		body.append("username", "kavi");
+		body.append("username", "tester");
 		body.append("password", "123456");
 
 		RequestApi(
