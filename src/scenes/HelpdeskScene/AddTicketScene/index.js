@@ -233,7 +233,7 @@ class _AddTicketScene extends Component {
 					</View>
 				</KeyboardAwareScrollView>
 				<TouchableOpacity style={styles.addBtn} onPress={this.onAddTicket}>
-					<Text>Add</Text>
+					<Text>{global_string.add}</Text>
 				</TouchableOpacity>
 				{
 					isLoading &&

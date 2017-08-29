@@ -30,6 +30,7 @@ const strings = new LocalizedStrings({
 		group: 'Group',
 		registernewmember: 'Register New Member',
 		addmessage: 'Add Message',
+		add: 'Add',
 		subject: 'Subject',
 		question: 'Question',
 		accessplatform: 'Access Platform (MGN)',
@@ -54,6 +55,9 @@ const strings = new LocalizedStrings({
 		title: 'Title',
 		date: 'Date',
 		userid: 'User ID',
+		departmentname: 'Department Name',
+		reply: 'Reply',
+		answer: 'Answer'
 	},
 	ch: {
 		home: '主页',
@@ -83,6 +87,7 @@ const strings = new LocalizedStrings({
 		group: '团队图',
 		registernewmember: '注册新会员',
 		addmessage: '添加留言',
+		add: '添加',
 		subject: '标题',
 		question: '问题',
 		accessplatform: '登入平台 (MGN)',
@@ -107,6 +112,9 @@ const strings = new LocalizedStrings({
 		title: '标题',
 		date: '日期/时间',
 		userid: '会员帐号',
+		departmentname: '询问部门',
+		reply: '回复',
+		answer: '回答',
 	},
 	ml: {
 		home: 'Utama',
@@ -136,6 +144,7 @@ const strings = new LocalizedStrings({
 		group: 'Kumpulan',
 		registernewmember: 'Mendaftar Ahli Baru',
 		addmessage: 'Tambah Mesej',
+		add: 'Tambah',
 		subject: 'Subjek',
 		question: 'Pertanyaan',
 		accessplatform: 'Platform Access (MGN)',
@@ -160,6 +169,9 @@ const strings = new LocalizedStrings({
 		title: 'Tajuk',
 		date: 'Tarikh',
 		userid: 'ID Ahli',
+		departmentname: 'Nama Jabatan',
+		reply: 'Membalas',
+		answer: 'Jawapannya',
 	}
 });
 
@@ -189,6 +201,7 @@ export default {
 	sponsor_data: [],
 	group_data: [],
 	ticket_data: [],
+	ticket_repy_data: [],
 	dep_data: [],
 	global_string: strings,
 };

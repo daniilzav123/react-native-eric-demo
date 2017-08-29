@@ -158,18 +158,30 @@ class _HelpdeskScene extends Component {
 		});
 	};
 
+	onReply = (id) => {
+		debugger;
+		this.props.navigation.navigate("ReplyTicket", {
+			ticket_id: id,
+		});
+	};
+
 	renderRow = (rowData, sectionID, rowID) => {
+		const { global_string } = AppConfig;
 		return (
-			<View style={styles.priceContainer}>
+			<TouchableOpacity style={styles.priceContainer} onPress={() => {this.onReply(rowData.ticket_no);}}>
 				<View style={styles.line}>
-					<Text>{AppConfig.global_string.subject}: </Text>
+					<Text>{global_string.subject}: </Text>
 					<Text>{rowData.title}</Text>
 				</View>
 				<View style={styles.line}>
-					<Text>Department Name: </Text>
+					<Text>{global_string.departmentname}: </Text>
 					<Text>{rowData.dept}</Text>
 				</View>
-			</View>
+				<View style={styles.line}>
+					<Text>{global_string.reply}: </Text>
+					<Text>{rowData.rtotal}</Text>
+				</View>
+			</TouchableOpacity>
 		);
 	};
 
