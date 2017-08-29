@@ -57,7 +57,11 @@ const strings = new LocalizedStrings({
 		userid: 'User ID',
 		departmentname: 'Department Name',
 		reply: 'Reply',
-		answer: 'Answer'
+		answer: 'Answer',
+		period: 'Period',
+		sponsorbonus: 'SPONSOR BONUS',
+		groupbonus: 'GROUP BONUS',
+		leadershipbonus: 'LEADERSHIP BONUS',
 	},
 	ch: {
 		home: '主页',
@@ -115,6 +119,10 @@ const strings = new LocalizedStrings({
 		departmentname: '询问部门',
 		reply: '回复',
 		answer: '回答',
+		period: '日期',
+		sponsorbonus: '领导奖金',
+		groupbonus: '团队奖金',
+		leadershipbonus: '推荐奖金',
 	},
 	ml: {
 		home: 'Utama',
@@ -172,6 +180,10 @@ const strings = new LocalizedStrings({
 		departmentname: 'Nama Jabatan',
 		reply: 'Membalas',
 		answer: 'Jawapannya',
+		period: 'Tarikh',
+		sponsorbonus: 'Bonus Sponsor',
+		groupbonus: 'Bonus Kumpulan',
+		leadershipbonus: 'Bonus Pemimpin',
 	}
 });
 
@@ -203,5 +215,6 @@ export default {
 	ticket_data: [],
 	ticket_repy_data: [],
 	dep_data: [],
+	profit_data: [],
 	global_string: strings,
 };
