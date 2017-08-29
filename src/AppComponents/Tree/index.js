@@ -12,6 +12,7 @@ import {
 import AppConfig from "AppConfig";
 import { GlobalStorage } from "AppUtilities";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import PinchZoomView from 'react-native-pinch-zoom-view';
 
 const bank_data = ["1", "1", "1", "1"];
 
@@ -337,12 +338,14 @@ export class Tree extends Component {
 				horizontal={true}
 				showsHorizontalScrollIndicator={false}
 			>
-				<ListView
-					dataSource={this.ds.cloneWithRows(bank_data)}
-					renderRow={this.renderRow}
-					enableEmptySections={true}
-					removeClippedSubviews={false}
-				/>
+				<View>
+					<ListView
+						dataSource={this.ds.cloneWithRows(bank_data)}
+						renderRow={this.renderRow}
+						enableEmptySections={true}
+						removeClippedSubviews={false}
+					/>
+				</View>
 			</ScrollView>
 		);
 	}

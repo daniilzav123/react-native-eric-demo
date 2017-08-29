@@ -62,6 +62,7 @@ const strings = new LocalizedStrings({
 		sponsorbonus: 'SPONSOR BONUS',
 		groupbonus: 'GROUP BONUS',
 		leadershipbonus: 'LEADERSHIP BONUS',
+		contents: 'Contents',
 	},
 	ch: {
 		home: '主页',
@@ -123,6 +124,7 @@ const strings = new LocalizedStrings({
 		sponsorbonus: '领导奖金',
 		groupbonus: '团队奖金',
 		leadershipbonus: '推荐奖金',
+		contents: '详情内容',
 	},
 	ml: {
 		home: 'Utama',
@@ -184,6 +186,7 @@ const strings = new LocalizedStrings({
 		sponsorbonus: 'Bonus Sponsor',
 		groupbonus: 'Bonus Kumpulan',
 		leadershipbonus: 'Bonus Pemimpin',
+		contents: 'Kandungan',
 	}
 });
 

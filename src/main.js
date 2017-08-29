@@ -94,18 +94,18 @@ class _MainPage extends Component {
 					this.routingRef.dispatch(editNavigateAction);
 				}
 				break;
+			// case 5:
+			// 	if (sidebar.currentScene === "ProductScene") {
+			// 		return;
+			// 	} else {
+			// 		const editNavigateAction = NavigationActions.reset({
+			// 			index: 0,
+			// 			actions: [NavigationActions.navigate({ routeName: "Product" })]
+			// 		});
+			// 		this.routingRef.dispatch(editNavigateAction);
+			// 	}
+			// 	break;
 			case 5:
-				if (sidebar.currentScene === "ProductScene") {
-					return;
-				} else {
-					const editNavigateAction = NavigationActions.reset({
-						index: 0,
-						actions: [NavigationActions.navigate({ routeName: "Product" })]
-					});
-					this.routingRef.dispatch(editNavigateAction);
-				}
-				break;
-			case 6:
 				if (sidebar.currentScene === "WalletScene" || sidebar.currentScene === "AddBankScene") {
 					return;
 				} else {
@@ -116,7 +116,7 @@ class _MainPage extends Component {
 					this.routingRef.dispatch(editNavigateAction);
 				}
 				break;
-			case 7:
+			case 6:
 				if (sidebar.currentScene === "ReportScene") {
 					return;
 				} else {
@@ -129,7 +129,7 @@ class _MainPage extends Component {
 					this.routingRef.dispatch(editNavigateAction);
 				}
 				break;
-			case 8:
+			case 7:
 				if (sidebar.currentScene === "HelpDeskScene" || sidebar.currentScene === "AddTicketScene") {
 					return;
 				} else {
@@ -140,7 +140,7 @@ class _MainPage extends Component {
 					this.routingRef.dispatch(editNavigateAction);
 				}
 				break;
-			case 9:
+			case 8:
 				if (sidebar.currentScene === "MyAccountScene") {
 					return;
 				} else {
@@ -151,17 +151,17 @@ class _MainPage extends Component {
 					this.routingRef.dispatch(editNavigateAction);
 				}
 				break;
-			case 10:
-				if (sidebar.currentScene === "MyAccountScene") {
-					return;
-				} else {
-					const editNavigateAction = NavigationActions.reset({
-						index: 0,
-						actions: [NavigationActions.navigate({ routeName: "MyAccount" })]
-					});
-					this.routingRef.dispatch(editNavigateAction);
-				}
-				break;
+			// case 9:
+				// if (sidebar.currentScene === "MyAccountScene") {
+				// 	return;
+				// } else {
+				// 	const editNavigateAction = NavigationActions.reset({
+				// 		index: 0,
+				// 		actions: [NavigationActions.navigate({ routeName: "MyAccount" })]
+				// 	});
+				// 	this.routingRef.dispatch(editNavigateAction);
+				// }
+				// break;
 			default:
 				break;
 		}

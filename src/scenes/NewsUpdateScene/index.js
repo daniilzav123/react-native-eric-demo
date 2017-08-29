@@ -111,10 +111,10 @@ class _NewsUpdateScene extends Component {
 	};
 
 	renderRow = (rowData, sectionID, rowID) => {
-		let str = rowData.contents;
-		str = str.substring(str.indexOf("http") + 1);
-		let new_str = str.substring(0, str.indexOf(".jpg"));
-		const imageUrl = 'h' + new_str + '.jpg';
+		// let str = rowData.contents;
+		// str = str.substring(str.indexOf("http") + 1);
+		// let new_str = str.substring(0, str.indexOf(".jpg"));
+		// const imageUrl = 'h' + new_str + '.jpg';
 		return (
 			<View style={styles.priceContainer}>
 				<View style={styles.line}>
@@ -122,15 +122,19 @@ class _NewsUpdateScene extends Component {
 					<Text>{rowData.title}</Text>
 				</View>
 				<View style={styles.line}>
+					<Text>{AppConfig.global_string.contents}: </Text>
+					<Text>{rowData.contents}</Text>
+				</View>
+				<View style={styles.line}>
 					<Text>{AppConfig.global_string.date}: </Text>
 					<Text>{rowData.date_created}</Text>
 				</View>
-				<View style={styles.line}>
-					<Image
-						style={styles.newsImg}
-						source={{ uri: imageUrl }}
-					/>
-				</View>
+				{/*<View style={styles.line}>*/}
+					{/*<Image*/}
+						{/*style={styles.newsImg}*/}
+						{/*source={{ uri: imageUrl }}*/}
+					{/*/>*/}
+				{/*</View>*/}
 			</View>
 		);
 	};

@@ -7,6 +7,7 @@ import {
 	ListView,
 	NativeModules,
 	ActivityIndicator,
+	Text,
 } from "react-native";
 import AppConfig from "AppConfig";
 import {
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
 	itemContainer: {
 		height: 50,
 		paddingHorizontal: 15,
-		justifyContent: "center",
+		flexDirection: 'row',
 	},
 	avatarImg: {
 		width: 40,
@@ -133,11 +134,11 @@ export class Menu extends Component {
 				{ index: 2, title: AppConfig.global_string.genealogy },
 				{ index: 3, title: AppConfig.global_string.mgntrade },
 				{ index: 4, title: AppConfig.global_string.exchangemarket },
-				{ index: 5, title: AppConfig.global_string.products },
-				{ index: 6, title: AppConfig.global_string.ewallet },
-				{ index: 7, title: AppConfig.global_string.report },
-				{ index: 8, title: AppConfig.global_string.helpdesk },
-				{ index: 9, title: AppConfig.global_string.myaccount }
+				// { index: 5, title: AppConfig.global_string.products },
+				{ index: 5, title: AppConfig.global_string.ewallet },
+				{ index: 6, title: AppConfig.global_string.report },
+				{ index: 7, title: AppConfig.global_string.helpdesk },
+				{ index: 8, title: AppConfig.global_string.myaccount }
 			],
 			lang: 'en',
 			isLoading: false,
@@ -155,11 +156,11 @@ export class Menu extends Component {
 				{ index: 2, title: AppConfig.global_string.genealogy },
 				{ index: 3, title: AppConfig.global_string.mgntrade },
 				{ index: 4, title: AppConfig.global_string.exchangemarket },
-				{ index: 5, title: AppConfig.global_string.products },
-				{ index: 6, title: AppConfig.global_string.ewallet },
-				{ index: 7, title: AppConfig.global_string.report },
-				{ index: 8, title: AppConfig.global_string.helpdesk },
-				{ index: 9, title: AppConfig.global_string.myaccount }
+				// { index: 5, title: AppConfig.global_string.products },
+				{ index: 5, title: AppConfig.global_string.ewallet },
+				{ index: 6, title: AppConfig.global_string.report },
+				{ index: 7, title: AppConfig.global_string.helpdesk },
+				{ index: 8, title: AppConfig.global_string.myaccount }
 			], });
 		} else if (nextProps.sidebar.language === 'ch') {
 			this.setState({ lang: 'ch', isShowSortsContainer: false, MENU_ITEMS: [
@@ -168,11 +169,11 @@ export class Menu extends Component {
 				{ index: 2, title: AppConfig.global_string.genealogy },
 				{ index: 3, title: AppConfig.global_string.mgntrade },
 				{ index: 4, title: AppConfig.global_string.exchangemarket },
-				{ index: 5, title: AppConfig.global_string.products },
-				{ index: 6, title: AppConfig.global_string.ewallet },
-				{ index: 7, title: AppConfig.global_string.report },
-				{ index: 8, title: AppConfig.global_string.helpdesk },
-				{ index: 9, title: AppConfig.global_string.myaccount }
+				// { index: 5, title: AppConfig.global_string.products },
+				{ index: 5, title: AppConfig.global_string.ewallet },
+				{ index: 6, title: AppConfig.global_string.report },
+				{ index: 7, title: AppConfig.global_string.helpdesk },
+				{ index: 8, title: AppConfig.global_string.myaccount }
 			], });
 		} else if (nextProps.sidebar.language === 'ml') {
 			this.setState({ lang: 'ml', isShowSortsContainer: false, MENU_ITEMS: [
@@ -181,11 +182,11 @@ export class Menu extends Component {
 				{ index: 2, title: AppConfig.global_string.genealogy },
 				{ index: 3, title: AppConfig.global_string.mgntrade },
 				{ index: 4, title: AppConfig.global_string.exchangemarket },
-				{ index: 5, title: AppConfig.global_string.products },
-				{ index: 6, title: AppConfig.global_string.ewallet },
-				{ index: 7, title: AppConfig.global_string.report },
-				{ index: 8, title: AppConfig.global_string.helpdesk },
-				{ index: 9, title: AppConfig.global_string.myaccount }
+				// { index: 5, title: AppConfig.global_string.products },
+				{ index: 5, title: AppConfig.global_string.ewallet },
+				{ index: 6, title: AppConfig.global_string.report },
+				{ index: 7, title: AppConfig.global_string.helpdesk },
+				{ index: 8, title: AppConfig.global_string.myaccount }
 			], });
 		}
 	}
@@ -259,6 +260,12 @@ export class Menu extends Component {
 				<LabelText style={styles.boldText} color={"white"} fontSize={13}>
 					{menuItem.title}
 				</LabelText>
+				{
+					menuItem.title === "News Update" &&
+						<View style={{width: 20, height: 20, borderRadius: 10, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center', marginLeft: 20, }}>
+							<Text>1</Text>
+						</View>
+				}
 			</TouchableOpacity>
 		);
 	};
@@ -274,11 +281,11 @@ export class Menu extends Component {
 				{ index: 2, title: AppConfig.global_string.genealogy },
 				{ index: 3, title: AppConfig.global_string.mgntrade },
 				{ index: 4, title: AppConfig.global_string.exchangemarket },
-				{ index: 5, title: AppConfig.global_string.products },
-				{ index: 6, title: AppConfig.global_string.ewallet },
-				{ index: 7, title: AppConfig.global_string.report },
-				{ index: 8, title: AppConfig.global_string.helpdesk },
-				{ index: 9, title: AppConfig.global_string.myaccount }
+				// { index: 5, title: AppConfig.global_string.products },
+				{ index: 5, title: AppConfig.global_string.ewallet },
+				{ index: 6, title: AppConfig.global_string.report },
+				{ index: 7, title: AppConfig.global_string.helpdesk },
+				{ index: 8, title: AppConfig.global_string.myaccount }
 			],  });
 		} else {
 			this.setState({ isLoading: true });
@@ -303,11 +310,11 @@ export class Menu extends Component {
 							{ index: 2, title: AppConfig.global_string.genealogy },
 							{ index: 3, title: AppConfig.global_string.mgntrade },
 							{ index: 4, title: AppConfig.global_string.exchangemarket },
-							{ index: 5, title: AppConfig.global_string.products },
-							{ index: 6, title: AppConfig.global_string.ewallet },
-							{ index: 7, title: AppConfig.global_string.report },
-							{ index: 8, title: AppConfig.global_string.helpdesk },
-							{ index: 9, title: AppConfig.global_string.myaccount }
+							// { index: 5, title: AppConfig.global_string.products },
+							{ index: 5, title: AppConfig.global_string.ewallet },
+							{ index: 6, title: AppConfig.global_string.report },
+							{ index: 7, title: AppConfig.global_string.helpdesk },
+							{ index: 8, title: AppConfig.global_string.myaccount }
 						],  });
 					} else {
 						this.setState({ isLoading: false });
@@ -331,11 +338,11 @@ export class Menu extends Component {
 				{ index: 2, title: AppConfig.global_string.genealogy },
 				{ index: 3, title: AppConfig.global_string.mgntrade },
 				{ index: 4, title: AppConfig.global_string.exchangemarket },
-				{ index: 5, title: AppConfig.global_string.products },
-				{ index: 6, title: AppConfig.global_string.ewallet },
-				{ index: 7, title: AppConfig.global_string.report },
-				{ index: 8, title: AppConfig.global_string.helpdesk },
-				{ index: 9, title: AppConfig.global_string.myaccount }
+				// { index: 5, title: AppConfig.global_string.products },
+				{ index: 5, title: AppConfig.global_string.ewallet },
+				{ index: 6, title: AppConfig.global_string.report },
+				{ index: 7, title: AppConfig.global_string.helpdesk },
+				{ index: 8, title: AppConfig.global_string.myaccount }
 			],  });
 		} else {
 			this.setState({ isLoading: true });
@@ -360,11 +367,11 @@ export class Menu extends Component {
 							{ index: 2, title: AppConfig.global_string.genealogy },
 							{ index: 3, title: AppConfig.global_string.mgntrade },
 							{ index: 4, title: AppConfig.global_string.exchangemarket },
-							{ index: 5, title: AppConfig.global_string.products },
-							{ index: 6, title: AppConfig.global_string.ewallet },
-							{ index: 7, title: AppConfig.global_string.report },
-							{ index: 8, title: AppConfig.global_string.helpdesk },
-							{ index: 9, title: AppConfig.global_string.myaccount }
+							// { index: 5, title: AppConfig.global_string.products },
+							{ index: 5, title: AppConfig.global_string.ewallet },
+							{ index: 6, title: AppConfig.global_string.report },
+							{ index: 7, title: AppConfig.global_string.helpdesk },
+							{ index: 8, title: AppConfig.global_string.myaccount }
 						],  });
 					} else {
 						this.setState({ isLoading: false });
@@ -400,11 +407,11 @@ export class Menu extends Component {
 						{ index: 2, title: AppConfig.global_string.genealogy },
 						{ index: 3, title: AppConfig.global_string.mgntrade },
 						{ index: 4, title: AppConfig.global_string.exchangemarket },
-						{ index: 5, title: AppConfig.global_string.products },
-						{ index: 6, title: AppConfig.global_string.ewallet },
-						{ index: 7, title: AppConfig.global_string.report },
-						{ index: 8, title: AppConfig.global_string.helpdesk },
-						{ index: 9, title: AppConfig.global_string.myaccount }
+						// { index: 5, title: AppConfig.global_string.products },
+						{ index: 5, title: AppConfig.global_string.ewallet },
+						{ index: 6, title: AppConfig.global_string.report },
+						{ index: 7, title: AppConfig.global_string.helpdesk },
+						{ index: 8, title: AppConfig.global_string.myaccount }
 					],  });
 				} else {
 					this.setState({ isLoading: false });
