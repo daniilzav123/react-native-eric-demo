@@ -68,6 +68,7 @@ class _GroupScene extends Component {
 		)
 			.then(response => {
 				if (response.status === "Success") {
+					debugger;
 					AppConfig.group_data = response;
 					this.setState({ isLoading: false });
 				} else {

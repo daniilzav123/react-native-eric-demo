@@ -162,7 +162,7 @@ class _MainScene extends Component {
 							<Text style={styles.upTxt}>{global_string.cashpoint}</Text>
 							<Text style={styles.downTxt}>${
 								dashboard_data.length === 0 ? 0 : dashboard_data.ewallet_details.CP.balance
-							}.00</Text>
+							}</Text>
 							<View style={styles.bar}/>
 						</View>
 

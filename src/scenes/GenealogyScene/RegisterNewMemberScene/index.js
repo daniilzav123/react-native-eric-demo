@@ -8,9 +8,10 @@ import {
 	ListView,
 	TouchableOpacity,
 	TextInput,
+	ActivityIndicator,
 } from "react-native";
 import AppConfig from "AppConfig";
-import { GlobalStorage } from "AppUtilities";
+import { GlobalStorage, RequestApi } from "AppUtilities";
 import { HeaderBar } from "AppComponents";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
@@ -61,11 +62,32 @@ const styles = StyleSheet.create({
 		borderColor: 'gray',
 		borderWidth: 1,
 		paddingHorizontal: 5,
+		marginTop: 15,
 		fontSize: 13,
 	},
 	treeContainer: {
 		paddingTop: 20,
-	}
+	},
+	addBtn: {
+		height: 35,
+		backgroundColor: 'gray',
+		justifyContent: 'center',
+		alignItems: 'center',
+		borderRadius: 5,
+		width: AppConfig.windowWidth - 100,
+		marginLeft: 50,
+		marginTop: 30,
+		marginBottom: 30,
+	},
+	loadingScene: {
+		position: "absolute",
+		width: AppConfig.windowWidth,
+		height: AppConfig.windowHeight,
+		alignSelf: "stretch",
+		backgroundColor: "rgba(0,0,0,0.5)",
+		alignItems: "center",
+		justifyContent: "center"
+	},
 });
 
 class _RegisterNewMemberScene extends Component {
@@ -82,6 +104,10 @@ class _RegisterNewMemberScene extends Component {
 		this.props.navigation.goBack();
 	};
 
+	onRegister = () => {
+
+	};
+
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
@@ -94,9 +120,50 @@ class _RegisterNewMemberScene extends Component {
 		this.props.showSideBar(false);
 		this.props.disableSideBar(false);
 		this.props.setCurrentScene("RegisterNewMemberScene");
+
+		this.setState({ isLoading: true });
+
+		let body = new FormData();
+		body.append("app_id", 'amgames!@#123');
+		body.append("access_token", AppConfig.accessToken);
+		body.append("matrix_userid", "tester");
+		body.append("matrix_side", "R");
+		body.append("txtSponsorId", "tester");
+		body.append("txtPrimaryPassword", "123456");
+		body.append("txtConfirmPrimaryPassword", "123456");
+		body.append("country", "14");
+		body.append("mobile", "016221180");
+		body.append("f_name", "first");
+		body.append("l_name", "last");
+		body.append("userid", "tester1");
+		body.append("selected_package", "1");
+		body.append("RP_pay", "1000");
+		body.append("payment_gateway", "E-WALLET");
+		body.append("action", "save");
+		body.append("email", "daniil@gmail.com");
+
+		RequestApi(
+			"member/signup",
+			body,
+			"POST"
+		)
+			.then(response => {
+				if (response.status === "Success") {
+					this.setState({ isLoading: false });
+					alert('registered successfully');
+					this.props.navigation.goBack();
+				} else {
+					this.setState({ isLoading: false });
+				}
+			})
+			.catch(error => {
+				alert(error);
+				this.setState({ isLoading: false });
+			});
 	}
 
 	render() {
+		const { isLoading } = this.state;
 		return (
 			<View style={styles.container}>
 				<HeaderBar
@@ -108,9 +175,59 @@ class _RegisterNewMemberScene extends Component {
 					<View style={styles.mainContainer}>
 						<TextInput
 							style={styles.textinput}
+							placeholder="sponsor id"
+						/>
+						<TextInput
+							style={styles.textinput}
+							placeholder="sponsor id"
+						/>
+						<TextInput
+							style={styles.textinput}
+							placeholder="primary password"
+						/>
+						<TextInput
+							style={styles.textinput}
+							placeholder="confirm primary password"
+						/>
+						<TextInput
+							style={styles.textinput}
+							placeholder="country"
+						/>
+						<TextInput
+							style={styles.textinput}
+							placeholder="mobile"
+						/>
+						<TextInput
+							style={styles.textinput}
+							placeholder="first name"
+						/>
+						<TextInput
+							style={styles.textinput}
+							placeholder="last name"
+						/>
+						<TextInput
+							style={styles.textinput}
+							placeholder="userid"
+						/>
+						<TextInput
+							style={styles.textinput}
+							placeholder="RP Pay"
+						/>
+						<TextInput
+							style={styles.textinput}
+							placeholder="email"
 						/>
 					</View>
+					<TouchableOpacity style={styles.addBtn} onPress={this.onRegister}>
+						<Text>Register</Text>
+					</TouchableOpacity>
 				</KeyboardAwareScrollView>
+				{
+					isLoading &&
+					<View style={styles.loadingScene}>
+						<ActivityIndicator animating={true} size="small" color="white" />
+					</View>
+				}
 			</View>
 		);
 	}

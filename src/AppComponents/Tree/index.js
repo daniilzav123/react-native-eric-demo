@@ -63,7 +63,7 @@ export class Tree extends Component {
 				<View
 					key={key}
 					style={{
-						width: 80 * this.props.scale,
+						width: 120 * this.props.scale,
 						height: 80 * this.props.scale,
 						justifyContent: 'center',
 						alignItems: 'center',
@@ -77,8 +77,9 @@ export class Tree extends Component {
 					}
 					{
 						this.matrix[parseInt(rowID)][i] > 0 && this.checkTree(parseInt(rowID), i) !== "null" && this.checkTree(parseInt(rowID), i) !== "+" &&
-							<TouchableOpacity style={{ padding: 20 }}>
+							<TouchableOpacity style={{ padding: 20, justifyContent: 'center', alignItems: 'center' }}>
 								<Image style={styles.plusImg} source={require('img/user.png')}/>
+								<Text style={{fontSize: 12 * this.props.scale, textAlign: 'center'}}>{this.checkTree(parseInt(rowID), i)}</Text>
 							</TouchableOpacity>
 					}
 				</View>
@@ -92,23 +93,22 @@ export class Tree extends Component {
 	};
 
 	checkTree = (i, j) => {
-		debugger;
 		const { treeData } = this.props;
 		if (i === 0) {
-			return "Root";
+			return treeData.data.userid;
 		} else if (i === 1) {
 			if (treeData.data.child === undefined) {
-				return "null";
+				return "+";
 			}
 			if (this.matrix[1][j] === 1) {
 				if (treeData.data.child.L !== undefined) {
-					return treeData.data.child.L.name;
+					return treeData.data.child.L.userid;
 				} else {
 					return "+"
 				}
 			} else {
 				if (treeData.data.child.R !== undefined) {
-					return treeData.data.child.R.name;
+					return treeData.data.child.R.userid;
 				} else {
 					return "+"
 				}
@@ -122,10 +122,10 @@ export class Tree extends Component {
 					return "null";
 				}
 				if (treeData.data.child.L.child === undefined) {
-					return "null";
+					return "+";
 				}
 				if (treeData.data.child.L.child.L !== undefined) {
-					return treeData.data.child.L.child.L.name;
+					return treeData.data.child.L.child.L.userid;
 				} else {
 					return "+"
 				}
@@ -134,10 +134,10 @@ export class Tree extends Component {
 					return "null";
 				}
 				if (treeData.data.child.L.child === undefined) {
-					return "null";
+					return "+";
 				}
 				if (treeData.data.child.L.child.R !== undefined) {
-					return treeData.data.child.L.child.R.name;
+					return treeData.data.child.L.child.R.userid;
 				} else {
 					return "+"
 				}
@@ -146,10 +146,10 @@ export class Tree extends Component {
 					return "null";
 				}
 				if (treeData.data.child.R.child === undefined) {
-					return "null";
+					return "+";
 				}
 				if (treeData.data.child.R.child.L !== undefined) {
-					return treeData.data.child.R.child.L.name;
+					return treeData.data.child.R.child.L.userid;
 				} else {
 					return "+"
 				}
@@ -158,10 +158,10 @@ export class Tree extends Component {
 					return "null";
 				}
 				if (treeData.data.child.R.child === undefined) {
-					return "null";
+					return "+";
 				}
 				if (treeData.data.child.R.child.R !== undefined) {
-					return treeData.data.child.R.child.R.name;
+					return treeData.data.child.R.child.R.userid;
 				} else {
 					return "+"
 				}
@@ -185,7 +185,7 @@ export class Tree extends Component {
 				}
 
 				if (treeData.data.child.L.child.L.child.L !== undefined) {
-					return treeData.data.child.L.child.L.child.L.name;
+					return treeData.data.child.L.child.L.child.L.userid;
 				} else {
 					return "+";
 				}
@@ -204,7 +204,7 @@ export class Tree extends Component {
 				}
 
 				if (treeData.data.child.L.child.L.child.R !== undefined) {
-					return treeData.data.child.L.child.L.child.R.name;
+					return treeData.data.child.L.child.L.child.R.userid;
 				} else {
 					return "+";
 				}
@@ -223,7 +223,7 @@ export class Tree extends Component {
 				}
 
 				if (treeData.data.child.L.child.R.child.L !== undefined) {
-					return treeData.data.child.L.child.R.child.L.name;
+					return treeData.data.child.L.child.R.child.L.userid;
 				} else {
 					return "+";
 				}
@@ -242,7 +242,7 @@ export class Tree extends Component {
 				}
 
 				if (treeData.data.child.L.child.R.child.R !== undefined) {
-					return treeData.data.child.L.child.R.child.R.name;
+					return treeData.data.child.L.child.R.child.R.userid;
 				} else {
 					return "+";
 				}
@@ -261,7 +261,7 @@ export class Tree extends Component {
 				}
 
 				if (treeData.data.child.R.child.L.child.L !== undefined) {
-					return treeData.data.child.R.child.L.child.L.name;
+					return treeData.data.child.R.child.L.child.L.userid;
 				} else {
 					return "+";
 				}
@@ -280,7 +280,7 @@ export class Tree extends Component {
 				}
 
 				if (treeData.data.child.R.child.L.child.R !== undefined) {
-					return treeData.data.child.R.child.L.child.R.name;
+					return treeData.data.child.R.child.L.child.R.userid;
 				} else {
 					return "+";
 				}
@@ -299,7 +299,7 @@ export class Tree extends Component {
 				}
 
 				if (treeData.data.child.R.child.R.child.L !== undefined) {
-					return treeData.data.child.R.child.R.child.L.name;
+					return treeData.data.child.R.child.R.child.L.userid;
 				} else {
 					return "+";
 				}
@@ -318,7 +318,7 @@ export class Tree extends Component {
 				}
 
 				if (treeData.data.child.R.child.R.child.R !== undefined) {
-					return treeData.data.child.R.child.R.child.R.name;
+					return treeData.data.child.R.child.R.child.R.userid;
 				} else {
 					return "+";
 				}
