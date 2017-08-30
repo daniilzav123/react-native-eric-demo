@@ -95,6 +95,8 @@ class _LoginScene extends Component {
 		this.state = {
 			isLoading: false,
 		};
+		this.user = "";
+		this.pass = "";
 	}
 
 	onLogin = () => {
@@ -103,8 +105,8 @@ class _LoginScene extends Component {
 
 		let body = new FormData();
 		body.append("app_id", 'amgames!@#123');
-		body.append("username", "tester");
-		body.append("password", "123456");
+		body.append("username", this.user);
+		body.append("password", this.pass);
 
 		RequestApi(
 			"member_login/login",
@@ -151,6 +153,14 @@ class _LoginScene extends Component {
 		this.props.setLanguage('ml');
 	};
 
+	onChangeUser = text => {
+		this.user = text;
+	};
+
+	onChangePass = text => {
+		this.pass = text;
+	};
+
 	render() {
 		const { isLoading } = this.state;
 		const { global_string } = AppConfig;
@@ -178,10 +188,12 @@ class _LoginScene extends Component {
 					<TextInput
 						style={styles.userInput}
 						placeholder={global_string.userid}
+						onChangeText={this.onChangeUser}
 					/>
 					<TextInput
 						style={styles.passInput}
 						placeholder={global_string.password}
+						onChangeText={this.onChangePass}
 						secureTextEntry={true}
 					/>
 				</View>
