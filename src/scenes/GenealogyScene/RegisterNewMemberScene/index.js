@@ -112,8 +112,20 @@ class _RegisterNewMemberScene extends Component {
 		super(props, context);
 		this.state = {
 			treeData: [{ title: 'Chicken', children: [ { title: 'Egg' } ] }],
+			isLoading: false,
 		};
 		this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+		this.sponsorId = "";
+		this.matrixside = "";
+		this.primarypass = "";
+		this.confirmprimarypass = "";
+		this.country = "";
+		this.mobile = "";
+		this.firstname = "";
+		this.lastname = "";
+		this.userid = "";
+		this.rppay = "";
+		this.email = "";
 	}
 
 	componentDidMount() {
@@ -126,21 +138,29 @@ class _RegisterNewMemberScene extends Component {
 		let body = new FormData();
 		body.append("app_id", 'amgames!@#123');
 		body.append("access_token", AppConfig.accessToken);
-		body.append("matrix_userid", "tester");
-		body.append("matrix_side", "R");
-		body.append("txtSponsorId", "tester");
-		body.append("txtPrimaryPassword", "123456");
-		body.append("txtConfirmPrimaryPassword", "123456");
-		body.append("country", "14");
-		body.append("mobile", "016221180");
-		body.append("f_name", "first");
-		body.append("l_name", "last");
-		body.append("userid", "tester1");
+
+		if (this.props.navigation.state.params.type === 0) {
+			body.append("matrix_userid", this.sponsorId);
+			body.append("txtSponsorId", this.sponsorId);
+			body.append("matrix_side", this.matrixside);
+		} else {
+			body.append("matrix_userid", this.props.navigation.state.params.parent);
+			body.append("txtSponsorId", this.props.navigation.state.params.parent);
+			body.append("matrix_side", this.props.navigation.state.params.l_r);
+			alert(this.props.navigation.state.params.parent + ',' + this.props.navigation.state.params.l_r);
+		}
+		body.append("txtPrimaryPassword", this.primarypass);
+		body.append("txtConfirmPrimaryPassword", this.confirmprimarypass);
+		body.append("country", this.country);
+		body.append("mobile", this.mobile);
+		body.append("f_name", this.firstname);
+		body.append("l_name", this.lastname);
+		body.append("userid", this.userid);
 		body.append("selected_package", "1");
-		body.append("RP_pay", "1000");
+		body.append("RP_pay", this.rppay);
 		body.append("payment_gateway", "E-WALLET");
 		body.append("action", "save");
-		body.append("email", "daniil@gmail.com");
+		body.append("email", this.email);
 
 		RequestApi(
 			"member/signup",
@@ -157,7 +177,6 @@ class _RegisterNewMemberScene extends Component {
 				}
 			})
 			.catch(error => {
-				alert(error);
 				this.setState({ isLoading: false });
 			});
 	}
@@ -173,49 +192,66 @@ class _RegisterNewMemberScene extends Component {
 				/>
 				<KeyboardAwareScrollView>
 					<View style={styles.mainContainer}>
-						<TextInput
-							style={styles.textinput}
-							placeholder="sponsor id"
-						/>
-						<TextInput
-							style={styles.textinput}
-							placeholder="sponsor id"
-						/>
+						{
+							this.props.navigation.state.params.type === 0 &&
+								<TextInput
+									style={styles.textinput}
+									placeholder="sponsor id"
+									onChangeText={(text) => {this.sponsorId = text;}}
+								/>
+						}
+						{
+							this.props.navigation.state.params.type === 0 &&
+								<TextInput
+									style={styles.textinput}
+									placeholder="Matrix Side"
+									onChangeText={(text) => {this.matrixside = text;}}
+								/>
+						}
 						<TextInput
 							style={styles.textinput}
 							placeholder="primary password"
+							onChangeText={(text) => {this.primarypass = text;}}
 						/>
 						<TextInput
 							style={styles.textinput}
 							placeholder="confirm primary password"
+							onChangeText={(text) => {this.confirmprimarypass = text;}}
 						/>
 						<TextInput
 							style={styles.textinput}
 							placeholder="country"
+							onChangeText={(text) => {this.country = text;}}
 						/>
 						<TextInput
 							style={styles.textinput}
 							placeholder="mobile"
+							onChangeText={(text) => {this.mobile = text;}}
 						/>
 						<TextInput
 							style={styles.textinput}
 							placeholder="first name"
+							onChangeText={(text) => {this.firstname = text;}}
 						/>
 						<TextInput
 							style={styles.textinput}
 							placeholder="last name"
+							onChangeText={(text) => {this.lastname = text;}}
 						/>
 						<TextInput
 							style={styles.textinput}
 							placeholder="userid"
+							onChangeText={(text) => {this.userid = text;}}
 						/>
 						<TextInput
 							style={styles.textinput}
 							placeholder="RP Pay"
+							onChangeText={(text) => {this.rppay = text;}}
 						/>
 						<TextInput
 							style={styles.textinput}
 							placeholder="email"
+							onChangeText={(text) => {this.email = text;}}
 						/>
 					</View>
 					<TouchableOpacity style={styles.addBtn} onPress={this.onRegister}>

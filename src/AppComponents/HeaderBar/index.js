@@ -76,6 +76,7 @@ export class HeaderBar extends Component {
 				<View style={styles.container}>
 					<TouchableOpacity
 						onPress={this.onBack}
+						style={{padding: 10}}
 					>
 						<Image
 							source={require('img/icon_back.png')}
@@ -92,6 +93,7 @@ export class HeaderBar extends Component {
 					<View style={styles.container}>
 						<TouchableOpacity
 							onPress={this.onMenu}
+							style={{padding: 10}}
 						>
 							<Image
 								source={require('img/icon_menu.png')}
@@ -108,6 +110,7 @@ export class HeaderBar extends Component {
 						<View style={styles.container}>
 							<TouchableOpacity
 								onPress={this.onMenu}
+								style={{padding: 10}}
 							>
 								<Image
 									source={require('img/icon_menu.png')}
@@ -117,6 +120,7 @@ export class HeaderBar extends Component {
 							<Text style={styles.cenTitle}>{ this.props.cenTitle }</Text>
 							<TouchableOpacity
 								onPress={this.onAddTicket}
+								style={{padding: 10}}
 							>
 								<Image
 									source={require('img/icon_uploadmore.png')}
@@ -130,6 +134,7 @@ export class HeaderBar extends Component {
 						<View style={styles.container}>
 							<TouchableOpacity
 								onPress={this.onMenu}
+								style={{padding: 10}}
 							>
 								<Image
 									source={require('img/icon_menu.png')}

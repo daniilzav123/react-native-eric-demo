@@ -134,7 +134,9 @@ class _GenealogyScene extends Component {
 	};
 
 	newMember = () => {
-		this.props.navigation.navigate("RegisterNewMember");
+		this.props.navigation.navigate("RegisterNewMember", {
+			type: 0,
+		});
 	};
 
 	onGroup = () => {

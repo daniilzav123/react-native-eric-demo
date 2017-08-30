@@ -76,7 +76,6 @@ class _GroupScene extends Component {
 				}
 			})
 			.catch(error => {
-				alert(error);
 				this.setState({ isLoading: false });
 			});
 	}
@@ -90,8 +89,65 @@ class _GroupScene extends Component {
 	};
 
 	onRegister = (x, y) => {
+		debugger;
+		const { data } = AppConfig.group_data;
+		let l_r = "L";
+		let parent = "";
+		if (x === 1) {
+			if (y === 1) {
+				l_r = "L";
+			} else {
+				l_r = "R";
+			}
+			parent = data.userid;
+		}
+
+		if (x === 2) {
+			if (y === 1) {
+				l_r = "L";
+				parent = data.child.L.userid;
+			} else if (y === 3) {
+				l_r = "R";
+				parent = data.child.L.userid;
+			} else if (y === 5) {
+				l_r = "L";
+				parent = data.child.R.userid;
+			} else {
+				l_r = "R";
+				parent = data.child.R.userid;
+			}
+		}
+
+		if (x === 3) {
+			if (y === 1) {
+				l_r = "L";
+				parent = data.child.L.child.L.userid;
+			} else if (y === 3) {
+				l_r = "R";
+				parent = data.child.L.child.L.userid;
+			} else if (y === 5) {
+				l_r = "L";
+				parent = data.child.L.child.R.userid;
+			} else if (y === 7) {
+				l_r = "R";
+				parent = data.child.L.child.R.userid;
+			} else if (y === 9) {
+				l_r = "L";
+				parent = data.child.R.child.L.userid;
+			} else if (y === 11) {
+				l_r = "R";
+				parent = data.child.R.child.L.userid;
+			} else if (y === 13) {
+				l_r = "L";
+				parent = data.child.R.child.R.userid;
+			} else {
+				l_r = "R";
+				parent = data.child.R.child.R.userid;
+			}
+		}
+
 		this.props.navigation.navigate("RegisterNewMember", {
-			x, y
+			x, y, parent, l_r, type: 1,
 		})
 	};
 
