@@ -6,6 +6,7 @@ import {
 	StyleSheet,
 	Text,
 	ActivityIndicator,
+	TouchableOpacity,
 } from "react-native";
 import AppConfig from "AppConfig";
 import { RequestApi, GlobalStorage } from "AppUtilities";
@@ -109,6 +110,7 @@ class _MainScene extends Component {
 		super(props, context);
 		this.state = {
 			isLoading: false,
+			showWallet: false,
 		};
 	}
 
@@ -157,6 +159,9 @@ class _MainScene extends Component {
 					onMenu={this.onMenu}
 				/>
 				<KeyboardAwareScrollView>
+					<TouchableOpacity style={styles.accountOverView} onPress={this.switch}>
+						<Text style={styles.redTxt}>{global_string.myaccountoverview}</Text>
+					</TouchableOpacity>
 					<View style={styles.priceContainer}>
 						<View>
 							<Text style={styles.upTxt}>{global_string.cashpoint}</Text>

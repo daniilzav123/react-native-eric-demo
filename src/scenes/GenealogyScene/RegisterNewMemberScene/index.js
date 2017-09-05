@@ -105,7 +105,53 @@ class _RegisterNewMemberScene extends Component {
 	};
 
 	onRegister = () => {
+		this.setState({ isLoading: true });
 
+		debugger;
+		let body = new FormData();
+		body.append("app_id", 'amgames!@#123');
+		body.append("access_token", AppConfig.accessToken);
+
+		if (this.props.navigation.state.params.type === 0) {
+			body.append("matrix_userid", this.sponsorId);
+			body.append("txtSponsorId", this.sponsorId);
+			body.append("matrix_side", this.matrixside);
+		} else {
+			body.append("matrix_userid", this.props.navigation.state.params.parent);
+			body.append("txtSponsorId", this.props.navigation.state.params.parent);
+			body.append("matrix_side", this.props.navigation.state.params.l_r);
+		}
+		body.append("txtPrimaryPassword", this.primarypass);
+		body.append("txtConfirmPrimaryPassword", this.confirmprimarypass);
+		body.append("country", this.country);
+		body.append("mobile", this.mobile);
+		body.append("f_name", this.firstname);
+		body.append("l_name", this.lastname);
+		body.append("userid", this.userid);
+		body.append("selected_package", "1");
+		body.append("RP_pay", this.rppay);
+		body.append("payment_gateway", "E-WALLET");
+		body.append("action", "save");
+		body.append("email", this.email);
+
+		RequestApi(
+			"member/signup",
+			body,
+			"POST"
+		)
+			.then(response => {
+				debugger;
+				if (response.status === "Success") {
+					this.setState({ isLoading: false });
+					alert('registered successfully');
+					this.props.navigation.goBack();
+				} else {
+					this.setState({ isLoading: false });
+				}
+			})
+			.catch(error => {
+				this.setState({ isLoading: false });
+			});
 	};
 
 	constructor(props, context) {
@@ -132,53 +178,6 @@ class _RegisterNewMemberScene extends Component {
 		this.props.showSideBar(false);
 		this.props.disableSideBar(false);
 		this.props.setCurrentScene("RegisterNewMemberScene");
-
-		this.setState({ isLoading: true });
-
-		let body = new FormData();
-		body.append("app_id", 'amgames!@#123');
-		body.append("access_token", AppConfig.accessToken);
-
-		if (this.props.navigation.state.params.type === 0) {
-			body.append("matrix_userid", this.sponsorId);
-			body.append("txtSponsorId", this.sponsorId);
-			body.append("matrix_side", this.matrixside);
-		} else {
-			body.append("matrix_userid", this.props.navigation.state.params.parent);
-			body.append("txtSponsorId", this.props.navigation.state.params.parent);
-			body.append("matrix_side", this.props.navigation.state.params.l_r);
-			alert(this.props.navigation.state.params.parent + ',' + this.props.navigation.state.params.l_r);
-		}
-		body.append("txtPrimaryPassword", this.primarypass);
-		body.append("txtConfirmPrimaryPassword", this.confirmprimarypass);
-		body.append("country", this.country);
-		body.append("mobile", this.mobile);
-		body.append("f_name", this.firstname);
-		body.append("l_name", this.lastname);
-		body.append("userid", this.userid);
-		body.append("selected_package", "1");
-		body.append("RP_pay", this.rppay);
-		body.append("payment_gateway", "E-WALLET");
-		body.append("action", "save");
-		body.append("email", this.email);
-
-		RequestApi(
-			"member/signup",
-			body,
-			"POST"
-		)
-			.then(response => {
-				if (response.status === "Success") {
-					this.setState({ isLoading: false });
-					alert('registered successfully');
-					this.props.navigation.goBack();
-				} else {
-					this.setState({ isLoading: false });
-				}
-			})
-			.catch(error => {
-				this.setState({ isLoading: false });
-			});
 	}
 
 	render() {
