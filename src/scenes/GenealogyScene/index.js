@@ -133,9 +133,14 @@ class _GenealogyScene extends Component {
 		);
 	};
 
+	reLoad = () => {
+
+	};
+
 	newMember = () => {
 		this.props.navigation.navigate("RegisterNewMember", {
 			type: 0,
+			reLoad: this.reLoad,
 		});
 	};
 

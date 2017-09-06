@@ -46,6 +46,7 @@ class _GroupScene extends Component {
 		this.state = {
 			scale: 1.0,
 			isLoading: false,
+			group_data: [],
 		};
 	}
 
@@ -54,6 +55,103 @@ class _GroupScene extends Component {
 		this.props.disableSideBar(false);
 		this.props.setCurrentScene("GroupScene");
 
+		this.setState({ isLoading: true });
+
+		let body = new FormData();
+		body.append("app_id", 'amgames!@#123');
+		body.append("access_token", AppConfig.accessToken);
+		body.append("sec_pass", "icentel..win");
+
+		RequestApi(
+			"member_network/binarytree",
+			body,
+			"POST"
+		)
+			.then(response => {
+				if (response.status === "Success") {
+					debugger;
+					this.setState({ isLoading: false, group_data: response.data });
+				} else {
+					this.setState({ isLoading: false });
+				}
+			})
+			.catch(error => {
+				this.setState({ isLoading: false });
+			});
+	}
+
+	onMenu = () => {
+		this.props.showSideBar(true);
+	};
+
+	onBack = () => {
+		this.props.navigation.goBack();
+	};
+
+	onRegister = (x, y) => {
+		const { group_data } = this.state;
+		let l_r = "L";
+		let parent = "";
+		if (x === 1) {
+			if (y === 1) {
+				l_r = "L";
+			} else {
+				l_r = "R";
+			}
+			parent = group_data.userid;
+		}
+
+		if (x === 2) {
+			if (y === 1) {
+				l_r = "L";
+				parent = group_data.child.L.userid;
+			} else if (y === 3) {
+				l_r = "R";
+				parent = group_data.child.L.userid;
+			} else if (y === 5) {
+				l_r = "L";
+				parent = group_data.child.R.userid;
+			} else {
+				l_r = "R";
+				parent = group_data.child.R.userid;
+			}
+		}
+
+		if (x === 3) {
+			if (y === 1) {
+				l_r = "L";
+				parent = group_data.child.L.child.L.userid;
+			} else if (y === 3) {
+				l_r = "R";
+				parent = group_data.child.L.child.L.userid;
+			} else if (y === 5) {
+				l_r = "L";
+				parent = group_data.child.L.child.R.userid;
+			} else if (y === 7) {
+				l_r = "R";
+				parent = group_data.child.L.child.R.userid;
+			} else if (y === 9) {
+				l_r = "L";
+				parent = group_data.child.R.child.L.userid;
+			} else if (y === 11) {
+				l_r = "R";
+				parent = group_data.child.R.child.L.userid;
+			} else if (y === 13) {
+				l_r = "L";
+				parent = group_data.child.R.child.R.userid;
+			} else {
+				l_r = "R";
+				parent = group_data.child.R.child.R.userid;
+			}
+		}
+
+		this.props.navigation.navigate("RegisterNewMember", {
+			x, y, parent, l_r, type: 1,
+			reLoad: this.reLoad,
+		})
+	};
+
+	reLoad = () => {
 		this.setState({ isLoading: true });
 
 		let body = new FormData();
@@ -78,77 +176,6 @@ class _GroupScene extends Component {
 			.catch(error => {
 				this.setState({ isLoading: false });
 			});
-	}
-
-	onMenu = () => {
-		this.props.showSideBar(true);
-	};
-
-	onBack = () => {
-		this.props.navigation.goBack();
-	};
-
-	onRegister = (x, y) => {
-		debugger;
-		const { data } = AppConfig.group_data;
-		let l_r = "L";
-		let parent = "";
-		if (x === 1) {
-			if (y === 1) {
-				l_r = "L";
-			} else {
-				l_r = "R";
-			}
-			parent = data.userid;
-		}
-
-		if (x === 2) {
-			if (y === 1) {
-				l_r = "L";
-				parent = data.child.L.userid;
-			} else if (y === 3) {
-				l_r = "R";
-				parent = data.child.L.userid;
-			} else if (y === 5) {
-				l_r = "L";
-				parent = data.child.R.userid;
-			} else {
-				l_r = "R";
-				parent = data.child.R.userid;
-			}
-		}
-
-		if (x === 3) {
-			if (y === 1) {
-				l_r = "L";
-				parent = data.child.L.child.L.userid;
-			} else if (y === 3) {
-				l_r = "R";
-				parent = data.child.L.child.L.userid;
-			} else if (y === 5) {
-				l_r = "L";
-				parent = data.child.L.child.R.userid;
-			} else if (y === 7) {
-				l_r = "R";
-				parent = data.child.L.child.R.userid;
-			} else if (y === 9) {
-				l_r = "L";
-				parent = data.child.R.child.L.userid;
-			} else if (y === 11) {
-				l_r = "R";
-				parent = data.child.R.child.L.userid;
-			} else if (y === 13) {
-				l_r = "L";
-				parent = data.child.R.child.R.userid;
-			} else {
-				l_r = "R";
-				parent = data.child.R.child.R.userid;
-			}
-		}
-
-		this.props.navigation.navigate("RegisterNewMember", {
-			x, y, parent, l_r, type: 1,
-		})
 	};
 
 	onScaleUp = () => {
@@ -162,6 +189,48 @@ class _GroupScene extends Component {
 		const { scale } = this.state;
 		if (scale > 0.5) {
 			this.setState({ scale: scale - 0.1});
+		}
+	};
+
+	onDownline = (x, y) => {
+		if (x === 1) {
+			if (y === 1) {
+				this.setState({ group_data: this.state.group_data.child.L });
+			} else {
+				this.setState({ group_data: this.state.group_data.child.R });
+			}
+		}
+
+		if (x === 2) {
+			if (y === 1) {
+				this.setState({ group_data: this.state.group_data.child.L.child.L });
+			} else if (y === 3) {
+				this.setState({ group_data: this.state.group_data.child.L.child.R });
+			} else if (y === 5) {
+				this.setState({ group_data: this.state.group_data.child.R.child.L });
+			} else {
+				this.setState({ group_data: this.state.group_data.child.R.child.R });
+			}
+		}
+
+		if (x === 3) {
+			if (y === 1) {
+				this.setState({ group_data: this.state.group_data.child.L.child.L.child.L });
+			} else if (y === 3) {
+				this.setState({ group_data: this.state.group_data.child.L.child.L.child.R });
+			} else if (y === 5) {
+				this.setState({ group_data: this.state.group_data.child.L.child.R.child.L });
+			} else if (y === 7) {
+				this.setState({ group_data: this.state.group_data.child.L.child.R.child.R });
+			} else if (y === 9) {
+				this.setState({ group_data: this.state.group_data.child.R.child.L.child.L });
+			} else if (y === 11) {
+				this.setState({ group_data: this.state.group_data.child.R.child.L.child.R });
+			} else if (y === 13) {
+				this.setState({ group_data: this.state.group_data.child.R.child.R.child.L });
+			} else {
+				this.setState({ group_data: this.state.group_data.child.R.child.R.child.R });
+			}
 		}
 	};
 
@@ -223,6 +292,7 @@ class _GroupScene extends Component {
 				}
 			}
 		};
+		const { group_data } = this.state;
 		return (
 			<View style={styles.container}>
 				<HeaderBar
@@ -231,7 +301,7 @@ class _GroupScene extends Component {
 					spec="Group"
 				/>
 				<View style={styles.treeContainer}>
-					<Tree treeData={AppConfig.group_data} register={this.onRegister} scale={this.state.scale}/>
+					<Tree treeData={group_data} register={this.onRegister} downline={this.onDownline} scale={this.state.scale}/>
 				</View>
 				{/*<View style={{*/}
 					{/*flexDirection: 'row',*/}

@@ -29,6 +29,7 @@ export class Tree extends Component {
 	static propTypes = {
 		treeData: PropTypes.any,
 		register: PropTypes.func,
+		downline: PropTypes.func,
 		scale: PropTypes.number,
 	};
 
@@ -78,7 +79,10 @@ export class Tree extends Component {
 					}
 					{
 						this.matrix[parseInt(rowID)][i] > 0 && this.checkTree(parseInt(rowID), i) !== "null" && this.checkTree(parseInt(rowID), i) !== "+" &&
-							<TouchableOpacity style={{ padding: 20, justifyContent: 'center', alignItems: 'center' }}>
+							<TouchableOpacity
+								style={{ padding: 20, justifyContent: 'center', alignItems: 'center' }}
+								onPress={() => { this.props.downline(parseInt(rowID), this.matrix[parseInt(rowID)][i]); }}
+							>
 								<Image style={styles.plusImg} source={require('img/user.png')}/>
 								<Text style={{fontSize: 12 * this.props.scale, textAlign: 'center'}}>{this.checkTree(parseInt(rowID), i)}</Text>
 							</TouchableOpacity>
@@ -96,230 +100,230 @@ export class Tree extends Component {
 	checkTree = (i, j) => {
 		const { treeData } = this.props;
 		if (i === 0) {
-			return treeData.data.userid;
+			return treeData.userid;
 		} else if (i === 1) {
-			if (treeData.data.child === undefined) {
+			if (treeData.child === undefined) {
 				return "+";
 			}
 			if (this.matrix[1][j] === 1) {
-				if (treeData.data.child.L !== undefined) {
-					return treeData.data.child.L.userid;
+				if (treeData.child.L !== undefined) {
+					return treeData.child.L.userid;
 				} else {
 					return "+"
 				}
 			} else {
-				if (treeData.data.child.R !== undefined) {
-					return treeData.data.child.R.userid;
+				if (treeData.child.R !== undefined) {
+					return treeData.child.R.userid;
 				} else {
 					return "+"
 				}
 			}
 		} else if (i === 2) {
-			if (treeData.data.child === undefined) {
+			if (treeData.child === undefined) {
 				return "null";
 			}
 			if (this.matrix[2][j] === 1) {
-				if (treeData.data.child.L === undefined) {
+				if (treeData.child.L === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.L.child === undefined) {
+				if (treeData.child.L.child === undefined) {
 					return "+";
 				}
-				if (treeData.data.child.L.child.L !== undefined) {
-					return treeData.data.child.L.child.L.userid;
+				if (treeData.child.L.child.L !== undefined) {
+					return treeData.child.L.child.L.userid;
 				} else {
 					return "+"
 				}
 			} else if (this.matrix[2][j] === 3) {
-				if (treeData.data.child.L === undefined) {
+				if (treeData.child.L === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.L.child === undefined) {
+				if (treeData.child.L.child === undefined) {
 					return "+";
 				}
-				if (treeData.data.child.L.child.R !== undefined) {
-					return treeData.data.child.L.child.R.userid;
+				if (treeData.child.L.child.R !== undefined) {
+					return treeData.child.L.child.R.userid;
 				} else {
 					return "+"
 				}
 			} else if (this.matrix[2][j] === 5) {
-				if (treeData.data.child.R === undefined) {
+				if (treeData.child.R === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.R.child === undefined) {
+				if (treeData.child.R.child === undefined) {
 					return "+";
 				}
-				if (treeData.data.child.R.child.L !== undefined) {
-					return treeData.data.child.R.child.L.userid;
+				if (treeData.child.R.child.L !== undefined) {
+					return treeData.child.R.child.L.userid;
 				} else {
 					return "+"
 				}
 			} else {
-				if (treeData.data.child.R === undefined) {
+				if (treeData.child.R === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.R.child === undefined) {
+				if (treeData.child.R.child === undefined) {
 					return "+";
 				}
-				if (treeData.data.child.R.child.R !== undefined) {
-					return treeData.data.child.R.child.R.userid;
+				if (treeData.child.R.child.R !== undefined) {
+					return treeData.child.R.child.R.userid;
 				} else {
 					return "+"
 				}
 			}
 		} else if (i === 3) {
-			if (treeData.data.child === undefined) {
+			if (treeData.child === undefined) {
 				return "null";
 			}
 			if (this.matrix[3][j] === 1) {
-				if (treeData.data.child.L === undefined) {
+				if (treeData.child.L === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.L.child === undefined) {
+				if (treeData.child.L.child === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.L.child.L === undefined) {
+				if (treeData.child.L.child.L === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.L.child.L.child === undefined) {
+				if (treeData.child.L.child.L.child === undefined) {
 					return "+";
 				}
 
-				if (treeData.data.child.L.child.L.child.L !== undefined) {
-					return treeData.data.child.L.child.L.child.L.userid;
+				if (treeData.child.L.child.L.child.L !== undefined) {
+					return treeData.child.L.child.L.child.L.userid;
 				} else {
 					return "+";
 				}
 			} else if (this.matrix[3][j] === 3) {
-				if (treeData.data.child.L === undefined) {
+				if (treeData.child.L === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.L.child === undefined) {
+				if (treeData.child.L.child === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.L.child.L === undefined) {
+				if (treeData.child.L.child.L === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.L.child.L.child === undefined) {
+				if (treeData.child.L.child.L.child === undefined) {
 					return "+";
 				}
 
-				if (treeData.data.child.L.child.L.child.R !== undefined) {
-					return treeData.data.child.L.child.L.child.R.userid;
+				if (treeData.child.L.child.L.child.R !== undefined) {
+					return treeData.child.L.child.L.child.R.userid;
 				} else {
 					return "+";
 				}
 			} else if (this.matrix[3][j] === 5) {
-				if (treeData.data.child.L === undefined) {
+				if (treeData.child.L === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.L.child === undefined) {
+				if (treeData.child.L.child === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.L.child.R === undefined) {
+				if (treeData.child.L.child.R === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.L.child.R.child === undefined) {
+				if (treeData.child.L.child.R.child === undefined) {
 					return "+";
 				}
 
-				if (treeData.data.child.L.child.R.child.L !== undefined) {
-					return treeData.data.child.L.child.R.child.L.userid;
+				if (treeData.child.L.child.R.child.L !== undefined) {
+					return treeData.child.L.child.R.child.L.userid;
 				} else {
 					return "+";
 				}
 			} else if (this.matrix[3][j] === 7) {
-				if (treeData.data.child.L === undefined) {
+				if (treeData.child.L === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.L.child === undefined) {
+				if (treeData.child.L.child === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.L.child.R === undefined) {
+				if (treeData.child.L.child.R === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.L.child.R.child === undefined) {
+				if (treeData.child.L.child.R.child === undefined) {
 					return "+";
 				}
 
-				if (treeData.data.child.L.child.R.child.R !== undefined) {
-					return treeData.data.child.L.child.R.child.R.userid;
+				if (treeData.child.L.child.R.child.R !== undefined) {
+					return treeData.child.L.child.R.child.R.userid;
 				} else {
 					return "+";
 				}
 			} else if (this.matrix[3][j] === 9) {
-				if (treeData.data.child.R === undefined) {
+				if (treeData.child.R === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.R.child === undefined) {
+				if (treeData.child.R.child === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.R.child.L === undefined) {
+				if (treeData.child.R.child.L === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.R.child.L.child === undefined) {
+				if (treeData.child.R.child.L.child === undefined) {
 					return "+";
 				}
 
-				if (treeData.data.child.R.child.L.child.L !== undefined) {
-					return treeData.data.child.R.child.L.child.L.userid;
+				if (treeData.child.R.child.L.child.L !== undefined) {
+					return treeData.child.R.child.L.child.L.userid;
 				} else {
 					return "+";
 				}
 			} else if (this.matrix[3][j] === 11) {
-				if (treeData.data.child.R === undefined) {
+				if (treeData.child.R === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.R.child === undefined) {
+				if (treeData.child.R.child === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.R.child.L === undefined) {
+				if (treeData.child.R.child.L === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.R.child.L.child === undefined) {
+				if (treeData.child.R.child.L.child === undefined) {
 					return "+";
 				}
 
-				if (treeData.data.child.R.child.L.child.R !== undefined) {
-					return treeData.data.child.R.child.L.child.R.userid;
+				if (treeData.child.R.child.L.child.R !== undefined) {
+					return treeData.child.R.child.L.child.R.userid;
 				} else {
 					return "+";
 				}
 			} else if (this.matrix[3][j] === 13) {
-				if (treeData.data.child.R === undefined) {
+				if (treeData.child.R === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.R.child === undefined) {
+				if (treeData.child.R.child === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.R.child.R === undefined) {
+				if (treeData.child.R.child.R === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.R.child.R.child === undefined) {
+				if (treeData.child.R.child.R.child === undefined) {
 					return "+";
 				}
 
-				if (treeData.data.child.R.child.R.child.L !== undefined) {
-					return treeData.data.child.R.child.R.child.L.userid;
+				if (treeData.child.R.child.R.child.L !== undefined) {
+					return treeData.child.R.child.R.child.L.userid;
 				} else {
 					return "+";
 				}
 			} else if (this.matrix[3][j] === 15) {
-				if (treeData.data.child.R === undefined) {
+				if (treeData.child.R === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.R.child === undefined) {
+				if (treeData.child.R.child === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.R.child.R === undefined) {
+				if (treeData.child.R.child.R === undefined) {
 					return "null";
 				}
-				if (treeData.data.child.R.child.R.child === undefined) {
+				if (treeData.child.R.child.R.child === undefined) {
 					return "+";
 				}
 
-				if (treeData.data.child.R.child.R.child.R !== undefined) {
-					return treeData.data.child.R.child.R.child.R.userid;
+				if (treeData.child.R.child.R.child.R !== undefined) {
+					return treeData.child.R.child.R.child.R.userid;
 				} else {
 					return "+";
 				}

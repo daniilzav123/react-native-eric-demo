@@ -144,6 +144,7 @@ class _RegisterNewMemberScene extends Component {
 				if (response.status === "Success") {
 					this.setState({ isLoading: false });
 					alert('registered successfully');
+					this.props.navigation.state.params.reLoad();
 					this.props.navigation.goBack();
 				} else {
 					this.setState({ isLoading: false });
